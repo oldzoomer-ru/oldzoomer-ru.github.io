@@ -1,0 +1,17 @@
+services:
+  nginx:
+    image: jonasal/nginx-certbot:latest
+    container_name: oldzoomer-site
+    restart: unless-stopped
+    environment:
+      CERTBOT_EMAIL: ${EMAIL}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ./nginx:/etc/nginx/user_conf.d
+      - ./site:/usr/share/nginx/html
+
+volumes:
+  nginx_secrets:
