@@ -1,25 +1,24 @@
 @font-face {
      font-family: "Cantarell";
      src: url('./Cantarell-VF.woff2') format('woff2');
-     font-weight: 800;
+     font-weight: 500 800;
      font-style: normal;
 }
 
-html {
-    height: 100vh;
+* {
     font-family: "Cantarell", sans-serif;
+    color: black;
+    word-wrap: break-word;
+}
+
+html, body {
+    min-height: 100vh;
 }
 
 body {
-    margin: 0 15px;
     display: flex;
-    min-height: 100vh;
     justify-content: center;
     align-items: center;
-}
-
-a {
-    color: black;
 }
 
 body main {
@@ -29,6 +28,14 @@ body main {
     align-items: center;
 }
 
-body main div {
-    width: 100%;
+body main * {
+    width: 90%;
+}
+
+h1 {
+     font-weight: 800;
+}
+
+h2, h3 {
+     font-weight: 700;
 }
