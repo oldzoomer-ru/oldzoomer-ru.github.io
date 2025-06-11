@@ -19,6 +19,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 body main {
@@ -33,9 +35,9 @@ body main * {
 }
 
 h1 {
-     font-weight: 800;
+    font-weight: 800;
 }
 
 h2, h3 {
-     font-weight: 700;
+    font-weight: 700;
 }
