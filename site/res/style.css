@@ -1,28 +1,33 @@
+/* Font definition for Cantarell */
 @font-face {
-     font-family: "Cantarell";
-     src: url('./Cantarell-VF.woff2') format('woff2');
-     font-weight: 500 800;
-     font-style: normal;
+    font-family: "Cantarell";
+    src: url('./Cantarell-VF.woff2') format('woff2');
+    font-weight: 500 800;
+    font-style: normal;
 }
 
+/* Base styles for all elements */
 * {
     font-family: "Cantarell", sans-serif;
-    color: black;
+    color: #333333;
     word-wrap: break-word;
 }
 
+/* Ensure full viewport height */
 html, body {
     min-height: 100vh;
 }
 
+/* Center content vertically and horizontally */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
+/* Main content area */
 body main {
     max-width: 700px;
     display: flex;
@@ -30,18 +35,24 @@ body main {
     align-items: center;
 }
 
+/* Ensure consistent width for main content children */
 body main * {
     width: 90%;
 }
 
+/* Headings */
 h1 {
     font-weight: 800;
+    color: #333333;
 }
 
 h2, h3 {
     font-weight: 700;
+    color: #333333;
 }
 
+/* List items */
 ol li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    color: #333333;
 }
