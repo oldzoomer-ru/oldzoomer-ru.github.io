@@ -3,41 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>oldzoomer - домашняя страница</title>
-    <link href="res/avatar.png" rel="icon" type="image/png">
-    <meta content="oldzoomer" name="author">
-    <meta content="Фидошник, линуксоид, Java-разработчик, ИИ-энтузиаст" name="description">
+    <title>oldzoomer - Фидошник и Java-разработчик | Персональная страница</title>
+    <meta name="description" content="Персональная страница oldzoomer - Фидошник, линуксоид, Java-разработчик и ИИ-энтузиаст">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="res/style.css" rel="stylesheet">
+    <meta name="author" content="oldzoomer">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oldzoomer.ru/">
+    <meta property="og:title" content="oldzoomer - Фидошник и Java-разработчик">
+    <meta property="og:description" content="Персональная страница oldzoomer - Фидошник, линуксоид, Java-разработчик и ИИ-энтузиаст">
+    <meta property="og:image" content="https://oldzoomer.ru/res/avatar.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://oldzoomer.ru/">
+    <meta property="twitter:title" content="oldzoomer - Фидошник и Java-разработчик">
+    <meta property="twitter:description" content="Персональная страница oldzoomer - Фидошник, линуксоид, Java-разработчик и ИИ-энтузиаст">
+    <meta property="twitter:image" content="https://oldzoomer.ru/res/avatar.png">
+
+    <!-- Preload resources -->
+    <link rel="preload" href="res/Cantarell-VF.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="res/style.css" as="style">
+    
+    <!-- Favicon and styles -->
+    <link rel="icon" href="res/avatar.png" type="image/png" loading="lazy">
+    <link rel="stylesheet" href="res/style.css">
     <script type='application/ld+json'>
         {
             "@context": "https://schema.org",
-            "@type": "ProfilePage",
-            "mainEntity": {
-                "@context": "http://www.schema.org",
-                "@type": "person",
-                "name": "oldzoomer",
-                "url": "https://oldzoomer.ru/",
-                "logo": "https://oldzoomer.ru/res/avatar.png",
-                "description": "Фидошник, линуксоид, Java-разработчик"
+            "@type": "Person",
+            "name": "oldzoomer",
+            "url": "https://oldzoomer.ru/",
+            "image": "https://oldzoomer.ru/res/avatar.png",
+            "description": "Фидошник, линуксоид, Java-разработчик и ИИ-энтузиаст",
+            "jobTitle": "Java Developer",
+            "knowsAbout": [
+                "Java",
+                "Spring Framework",
+                "SQL",
+                "Linux",
+                "Docker",
+                "Microservices",
+                "Artificial Intelligence"
+            ],
+            "sameAs": [
+                "https://github.com/oldzoomer-ru",
+                "https://habr.com/ru/users/oldzoomer/",
+                "https://www.linkedin.com/in/oldzoomer/"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "RU"
             }
         }
     </script>
 </head>
 
 <body>
-    <main>
-        <h1>oldzoomer</h1>
-        <h2>Фидошник, Java-разработчик</h2>
-        <div class="skills">
-            <h3>Мой основной стек:</h3>
-            <ol>
-                <li>Java (Spring, JPA)</li>
-                <li>SQL (PostgreSQL, Microsoft SQL Server)</li>
-                <li>Linux (Docker)</li>
-                <li>Git, GitHub</li>
-                <li>Микросервисы (Kafka)</li>
-                <li>ИИ-технологии (LLM, AI autocomplete, code agents)</li>
+    <main role="main">
+        <h1 aria-label="Персональная страница oldzoomer">oldzoomer</h1>
+        <h2 aria-label="Род деятельности: Фидошник, Java-разработчик">Фидошник, Java-разработчик</h2>
+        
+        <section class="skills" aria-labelledby="skills-heading">
+            <h3 id="skills-heading">Мой основной стек:</h3>
+            <ol role="list">
+                <li role="listitem">Java (Spring, JPA)</li>
+                <li role="listitem">SQL (PostgreSQL, Microsoft SQL Server)</li>
+                <li role="listitem">Linux (Docker)</li>
+                <li role="listitem">Git, GitHub</li>
+                <li role="listitem">Микросервисы (Kafka)</li>
+                <li role="listitem">ИИ-технологии (LLM, AI autocomplete, code agents)</li>
             </ol>
             <p>
                 В настоящее время я, в основном, увлекаюсь
@@ -49,19 +85,28 @@
                 проектах написана, либо подвергнута рефакторингу
                 со стороны ИИ.
             </p>
-        </div>
-        <div class="links">
-            <h3>Ссылки:</h3>
-            <ol>
-                <li><a href="https://github.com/oldzoomer-ru">GitHub</a></li>
-                <li><a href="https://habr.com/ru/users/oldzoomer/">Habr</a></li>
-                <li><a href="https://www.linkedin.com/in/oldzoomer/">LinkedIn</a></li>
-            </ol>
+        </section>
+
+        <section class="links" aria-labelledby="links-heading">
+            <h3 id="links-heading">Ссылки:</h3>
+            <nav aria-label="Основные профили в соцсетях">
+                <ol role="list">
+                    <li role="listitem">
+                        <a href="https://github.com/oldzoomer-ru" aria-label="Профиль на GitHub">GitHub</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="https://habr.com/ru/users/oldzoomer/" aria-label="Профиль на Habr">Habr</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="https://www.linkedin.com/in/oldzoomer/" aria-label="Профиль на LinkedIn">LinkedIn</a>
+                    </li>
+                </ol>
+            </nav>
             <p>
                Также я являюсь самым молодым сисопом
                в Фидонете на сегодняшний день - 2:5015/519.
             </p>
-        </div>
+        </section>
     </main>
 </body>
 

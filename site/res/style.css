@@ -1,58 +1,189 @@
-/* Font definition for Cantarell */
+:root {
+    --color-text: #333333;
+    --color-primary: #2c3e50;
+    --color-secondary: #7f8c8d;
+    --font-main: "Cantarell", sans-serif;
+    --font-weight-bold: 800;
+    --font-weight-semibold: 700;
+    --max-width: 700px;
+    --content-padding: 10px;
+}
+
+/* Font definition with performance optimizations */
 @font-face {
     font-family: "Cantarell";
     src: url('./Cantarell-VF.woff2') format('woff2');
     font-weight: 500 800;
     font-style: normal;
+    font-display: swap;
 }
 
-/* Base styles for all elements */
+/* Base styles */
 * {
-    font-family: "Cantarell", sans-serif;
-    color: #333333;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    color: var(--color-text);
     word-wrap: break-word;
 }
 
-/* Ensure full viewport height */
+/* Layout */
 html, body {
     min-height: 100vh;
 }
 
-/* Center content vertically and horizontally */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 10px;
+    padding: var(--content-padding);
+    background-color: #ffffff;
 }
 
-/* Main content area */
-body main {
-    max-width: 700px;
+/* Main content */
+main {
+    max-width: var(--max-width);
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    padding: var(--content-padding);
 }
 
-/* Ensure consistent width for main content children */
-body main * {
+main > * {
     width: 90%;
+    margin-bottom: 1.5rem;
 }
 
-/* Headings */
+/* Typography */
 h1 {
-    font-weight: 800;
-    color: #333333;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-size: 2.5rem;
+    line-height: 1.2;
 }
 
 h2, h3 {
-    font-weight: 700;
-    color: #333333;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
 }
 
-/* List items */
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+/* Lists */
+ol {
+    padding-left: 1.5rem;
+}
+
 ol li {
-    margin-bottom: 10px;
-    color: #333333;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+/* Links and interactive elements */
+a, button {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+a:hover, a:focus {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    outline: none;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animation for main content */
+main {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    :root {
+        --max-width: 100%;
+        --content-padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    main > * {
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --content-padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background-color: transparent;
+        color: #000;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
 }
