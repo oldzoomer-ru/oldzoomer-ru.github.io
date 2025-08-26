@@ -1,12 +1,25 @@
 :root {
-    --color-text: #333333;
-    --color-primary: #2c3e50;
-    --color-secondary: #7f8c8d;
     --font-main: "Cantarell", sans-serif;
     --font-weight-bold: 800;
     --font-weight-semibold: 700;
     --max-width: 700px;
     --content-padding: 10px;
+
+    /* Новые цветовые переменные */
+    --window-bg-color: #fafafb;
+    --window-fg-color: rgba(0, 0, 6, 0.8);
+    --accent-bg-color: #3584e4;
+    --accent-fg-color: #ffffff;
+    --card-bg-color: #ffffff;
+    --card-fg-color: rgba(0, 0, 6, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --window-bg-color: #222226;
+        --window-fg-color: #ffffff;
+        --card-bg-color: rgba(255, 255, 255, 0.08);
+    }
 }
 
 /* Font definition with performance optimizations */
@@ -24,7 +37,7 @@
     margin: 0;
     padding: 0;
     font-family: var(--font-main);
-    color: var(--color-text);
+    color: var(--window-fg-color);
     word-wrap: break-word;
 }
 
@@ -38,7 +51,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: var(--content-padding);
-    background-color: #ffffff;
+    background-color: var(--window-bg-color);
 }
 
 /* Main content */
@@ -63,14 +76,14 @@ main section {
 /* Typography */
 h1 {
     font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
+    color: var(--accent-bg-color);
     font-size: 2.5rem;
     line-height: 1.2;
 }
 
 h2, h3 {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-primary);
+    color: var(--accent-bg-color);
 }
 
 h2 {
@@ -93,13 +106,13 @@ ol li {
 
 /* Links and interactive elements */
 a, button {
-    color: var(--color-primary);
+    color: var(--accent-bg-color);
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s ease;
 }
 
 a:hover, a:focus {
-    color: var(--color-secondary);
+    color: var(--accent-bg-color);
     text-decoration: underline;
     outline: none;
 }
@@ -143,6 +156,15 @@ main {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* Анимации для карточек */
+.card {
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card:hover {
+    transform: translateY(-2px);
 }
 
 /* Responsive design */
@@ -190,4 +212,29 @@ main {
         color: #000;
         text-decoration: underline;
     }
+}
+
+/* Typography utility classes */
+.title-1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 1rem 0;
+}
+
+.title-2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
+}
+
+.heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0.6rem 0;
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
 }

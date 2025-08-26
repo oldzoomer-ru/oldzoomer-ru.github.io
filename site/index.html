@@ -50,12 +50,12 @@
 </head>
 
 <body>
-    <main role="main">
-        <h1 aria-label="Персональная страница oldzoomer">oldzoomer</h1>
-        <h2 aria-label="Род деятельности: Фидошник, Java-разработчик">Фидошник, Java-разработчик</h2>
+    <main role="main" class="body">
+        <div class="title-1" aria-label="Персональная страница oldzoomer">oldzoomer</div>
+        <div class="title-2" aria-label="Род деятельности: Фидошник, Java-разработчик">Фидошник, Java-разработчик</div>
         
-        <section class="skills" aria-labelledby="skills-heading">
-            <h3 id="skills-heading">Мой основной стек:</h3>
+        <section class="card" style="margin: 1rem 0;" aria-labelledby="skills-heading">
+            <div class="heading" id="skills-heading">Мой основной стек:</div>
             <ol role="list">
                 <li role="listitem">Java (Spring, JPA)</li>
                 <li role="listitem">SQL (PostgreSQL, Microsoft SQL Server)</li>
@@ -69,15 +69,15 @@
             </p>
         </section>
 
-        <section class="links" aria-labelledby="links-heading">
-            <h3 id="links-heading">Ссылки:</h3>
-            <nav aria-label="Основные профили в соцсетях">
+        <section class="card" style="margin: 1rem 0;" aria-labelledby="links-heading">
+            <div class="heading" id="links-heading">Ссылки:</div>
+            <nav class="boxed-list" aria-label="Основные профили в соцсетях">
                 <ol role="list">
                     <li role="listitem">
-                        <a href="https://github.com/oldzoomer-ru" aria-label="Профиль на GitHub">GitHub</a>
+                        <a class="activatable" href="https://github.com/oldzoomer-ru" aria-label="Профиль на GitHub">GitHub</a>
                     </li>
                     <li role="listitem">
-                        <a href="https://habr.com/ru/users/oldzoomer/" aria-label="Профиль на Хабре">Хабр</a>
+                        <a class="activatable" href="https://habr.com/ru/users/oldzoomer/" aria-label="Профиль на Хабре">Хабр</a>
                     </li>
                 </ol>
             </nav>
