@@ -1,14 +1,14 @@
 services:
-  react-app:
-    build: .
-    ports: 
-      - "80:80"
+  nginx:
+    image: nginx:stable-alpine
+    ports: [80]
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
     restart: unless-stopped
     labels:
-      - "traefik.http.routers.${PROJ_NAME:-oldzoomer}.rule=Host(`${DOMAIN:-localhost}`)"
-      - "traefik.http.routers.${PROJ_NAME:-oldzoomer}.entrypoints=websecure"
-      - "traefik.http.routers.${PROJ_NAME:-oldzoomer}.tls.certresolver=myresolver"
-      - "traefik.enable=true"
+      - "traefik.http.routers.${PROJ_NAME}.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${PROJ_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${PROJ_NAME}.tls.certresolver=myresolver"
 networks:
   default:
     external:
