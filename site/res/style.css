@@ -108,7 +108,6 @@ ol li {
 a, button {
     color: var(--accent-bg-color);
     text-decoration: none;
-    transition: all 0.2s ease;
 }
 
 a:hover, a:focus {
@@ -126,45 +125,6 @@ a:hover, a:focus {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
-}
-
-/* Animation for main content */
-main {
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-    
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* Анимации для карточек */
-.card {
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.card:hover {
-    transform: translateY(-2px);
 }
 
 /* Responsive design */
