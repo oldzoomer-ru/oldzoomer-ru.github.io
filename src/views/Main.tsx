@@ -28,9 +28,11 @@ function Main() {
   }
 
   return (
-    <article className="prose lg:prose-xl font-cantarell p-7">
-      <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
-    </article>
+    <main className="font-cantarell flex justify-center items-center w-full">
+      <article className="prose lg:prose-xl p-7">
+        <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+      </article>
+    </main>
   )
 }
 
