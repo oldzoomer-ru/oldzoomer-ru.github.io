@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Cantarell";
+  src:
+    local("Cantarell"),
+    url("./assets/fonts/Cantarell-VF.otf") format("opentype");
+}
+
+@theme {
+  --font-family-cantarell: "Cantarell", sans-serif;
+}
+
+@layer base {
+  html {
+    /* Используем переменную из темы */
+    font-family: var(--font-family-cantarell);
+    line-height: 1.5;
+    @apply antialiased text-gray-900 dark:text-gray-100;
+  }
+}
