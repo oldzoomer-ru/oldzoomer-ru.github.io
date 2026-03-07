@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import StructuredData from "../components/StructuredData"
+import { personStructuredData } from "../data/structuredData"
 
 function Main() {
   const download = async (url: string): Promise<string> => {
@@ -38,11 +40,14 @@ function Main() {
   }
 
   return (
-    <main className="font-cantarell flex justify-center items-center w-full">
-      <article className="prose lg:prose-xl p-7">
-        <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
-      </article>
-    </main>
+    <>
+      <StructuredData data={personStructuredData} />
+      <main className="font-cantarell flex justify-center items-center w-full">
+        <article className="prose lg:prose-xl p-7">
+          <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+        </article>
+      </main>
+    </>
   )
 }
 
