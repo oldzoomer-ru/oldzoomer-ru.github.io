@@ -99,7 +99,7 @@ function CVBlock({ data }: CVBlockProps) {
       {data.summary && (
         <section>
           <h2 className="text-xl font-bold mb-3 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            О себе
+            About Me
           </h2>
           <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{data.summary}</p>
         </section>
@@ -109,17 +109,17 @@ function CVBlock({ data }: CVBlockProps) {
       {data.experience.length > 0 && (
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Опыт работы
+            Work Experience
           </h2>
           <div className="space-y-6">
             {data.experience.map((exp, index) => (
               <div key={index} className="relative pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-500"></div>
                 <div className="mb-1">
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
                     {exp.position}
                   </h3>
-                  <p className="text-blue-600 dark:text-blue-400 font-medium">
+                  <p className="text-gray-700 dark:text-gray-300 font-medium">
                     {exp.company}
                   </p>
                   {exp.location && (
@@ -129,7 +129,7 @@ function CVBlock({ data }: CVBlockProps) {
                   )}
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  {exp.startDate} — {exp.endDate || 'настоящее время'}{exp.duration && ` (${exp.duration})`}
+                  {exp.startDate} - {exp.endDate || 'present'}{exp.duration && ` (${exp.duration})`}
                 </p>
                 {exp.description.length > 0 && (
                   <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
@@ -148,7 +148,7 @@ function CVBlock({ data }: CVBlockProps) {
       {data.education.length > 0 && (
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Образование
+            Education
           </h2>
           <div className="space-y-4">
             {data.education.map((edu, index) => (
@@ -158,11 +158,11 @@ function CVBlock({ data }: CVBlockProps) {
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300">
                   {edu.degree}
-                  {edu.field && ` • ${edu.field}`}
+                  {edu.field && ` - ${edu.field}`}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {edu.graduationYear || `${edu.startDate || ''} — ${edu.endDate || 'настоящее время'}`}
-                  {edu.location && ` • ${edu.location}`}
+                  {edu.graduationYear || `${edu.startDate || ''} - ${edu.endDate || 'present'}`}
+                  {edu.location && ` - ${edu.location}`}
                 </p>
               </div>
             ))}
@@ -174,7 +174,7 @@ function CVBlock({ data }: CVBlockProps) {
       {data.languages && data.languages.length > 0 && (
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Знание языков
+            Languages
           </h2>
           <div className="space-y-2">
             {data.languages.map((lang, index) => (
@@ -192,7 +192,7 @@ function CVBlock({ data }: CVBlockProps) {
         data.skills.length > 0 && (
           <section>
             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-              Навыки
+              Skills
             </h2>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {data.skills.map((skill, index) => (
@@ -204,7 +204,7 @@ function CVBlock({ data }: CVBlockProps) {
                     {skill.items.map((item, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                        className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm"
                       >
                         {item}
                       </span>
@@ -218,13 +218,13 @@ function CVBlock({ data }: CVBlockProps) {
       ) : ('technical' in data.skills && data.skills.technical.length > 0) && (
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Навыки
+            Skills
           </h2>
           <div className="flex flex-wrap gap-2">
             {data.skills.technical.map((skill, i) => (
               <span
                 key={i}
-                className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-sm"
               >
                 {skill}
               </span>
@@ -237,7 +237,7 @@ function CVBlock({ data }: CVBlockProps) {
       {data.projects && data.projects.length > 0 && (
         <section>
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Проекты
+            Projects
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {data.projects.map((project, index) => (
@@ -270,9 +270,9 @@ function CVBlock({ data }: CVBlockProps) {
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                        className="text-sm text-gray-600 dark:text-gray-400 hover:underline"
                       >
-                        Сайт проекта →
+                        Project Website
                       </a>
                     )}
                     {project.repository && (
@@ -280,9 +280,9 @@ function CVBlock({ data }: CVBlockProps) {
                         href={project.repository}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                        className="text-sm text-gray-600 dark:text-gray-400 hover:underline"
                       >
-                        Репозиторий →
+                        Repository
                       </a>
                     )}
                   </div>
