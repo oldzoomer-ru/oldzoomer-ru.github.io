@@ -1,0 +1,68 @@
+{
+  "personalInfo": {
+    "name": "Гаврилов Егор Денисович",
+    "gender": "Мужчина",
+    "phone": "+7 (996) 0088105",
+    "email": "gavrilovegor519-2@yandex.ru",
+    "telegram": "@oldzoomer_ru",
+    "setka": "https://set.ki/Dzarbxm",
+    "github": "github.com/oldzoomer-ru",
+    "website": "oldzoomer.ru",
+    "location": "Кстово",
+    "citizenship": "Россия",
+    "workPermit": "Россия",
+    "relocation": "Не готов к переезду",
+    "businessTrips": "Не готов к командировкам",
+    "lastUpdated": "31 марта 2026 в 05:30"
+  },
+  "desiredPosition": {
+    "title": "Java-разработчик (Spring)",
+    "specializations": ["Программист, разработчик"],
+    "employmentType": ["полная занятость", "стажировка"],
+    "workFormat": ["на месте работодателя", "удалённо", "гибрид"],
+    "commuteTime": "не имеет значения"
+  },
+  "cv": {
+    "summary": "- Backend-разработчик, специализируюсь на стеке Java / Spring.\n\n- Опыт миграции legacy-сервиса на современные технологии (Spring Boot, Vaadin) в GovTech-проекте.\n\n- Устранил ~10 критических ошибок в генерации отчетов, что привело к стабилизации работы сервиса для конечных пользователей.\n\n- Навыки DevOps: развертывание и поддержка приложений, автоматизация инфраструктуры.\n\nРассматриваю удалёнку по всей РФ (в т. ч. и в других часовых поясах), гибрид в Нижнем Новгороде, и гибрид/офис в Кстово.\n\nTelegram: @oldzoomer_ru\nПочта: gavrilovegor519-2@yandex.ru, work@oldzoomer.ru\nСайт: oldzoomer.ru\nGitHub: github.com/oldzoomer-ru",
+    "experience": [
+      {
+        "position": "Java-разработчик (fullstack)",
+        "company": "AISA",
+        "location": "Москва",
+        "website": "www.aisa.ru",
+        "industry": "Информационные технологии, системная интеграция, интернет",
+        "specialization": ["Разработка программного обеспечения", "Системная интеграция, автоматизация технологических и бизнес-процессов предприятия, ИТ-консалтинг"],
+        "startDate": "Апрель 2024",
+        "endDate": "Август 2024",
+        "duration": "5 месяцев",
+        "description": [
+          "Перевел ключевой модуль планирования бюджета с legacy-платформы на современный стек (Spring Boot, Vaadin), что сняло зависимость от Windows Server и упростило дальнейшую поддержку.",
+          "Стабилизировал работу сервиса генерации отчетов (Word, PDF), устранив ~10 критических ошибок, приводивших к его падениям под нагрузкой.",
+          "Разработал ~20 UI-компонентов на Vaadin для точного воспроизведения интерфейса старой системы, обеспечив бесшовный и привычный пользовательский опыт для сотрудников."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institution": "Международный Восточно-Европейский колледж",
+        "location": "Ижевск",
+        "degree": "Среднее специальное",
+        "field": "Информационные системы и программирование",
+        "graduationYear": "2026"
+      }
+    ],
+    "languages": [
+      {
+        "language": "Русский",
+        "level": "Родной"
+      },
+      {
+        "language": "Английский",
+        "level": "B1 — Средний"
+      }
+    ],
+    "skills": {
+      "technical": ["Java", "Spring Framework", "Docker", "Gradle", "Apache Kafka", "SQL", "Apache Maven", "Mockito", "API", "JUnit", "Flyway", "Hibernate", "Redis", "Keycloak", "OIDC", "Linux"]
+    }
+  }
+}
