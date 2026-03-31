@@ -154,9 +154,9 @@ function CV() {
       <nav className="w-full max-w-4xl mx-auto p-7">
         <Link 
           to="/" 
-          className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
+          className="text-gray-600 dark:text-gray-400 hover:underline inline-flex items-center gap-2"
         >
-          ← Back to Home
+          Back to Home
         </Link>
       </nav>
       
@@ -168,13 +168,13 @@ function CV() {
               <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                 {cvData.personalInfo.name}
               </h1>
-              <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold">
+              <p className="text-xl text-gray-700 dark:text-gray-300 font-semibold">
                 {cvData.desiredPosition.title}
               </p>
             </div>
             {cvData.personalInfo.lastUpdated && (
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Резюме обновлено {cvData.personalInfo.lastUpdated}
+                CV updated {cvData.personalInfo.lastUpdated}
               </p>
             )}
           </div>
@@ -182,35 +182,35 @@ function CV() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700 dark:text-gray-300">
             {cvData.personalInfo.phone && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">📱</span>
+                <span className="font-medium">Phone:</span>
                 <a href={`tel:${cvData.personalInfo.phone}`} className="hover:underline">{cvData.personalInfo.phone}</a>
               </div>
             )}
             {cvData.personalInfo.email && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">✉️</span>
+                <span className="font-medium">Email:</span>
                 <a href={`mailto:${cvData.personalInfo.email}`} className="hover:underline">{cvData.personalInfo.email}</a>
               </div>
             )}
             {cvData.personalInfo.telegram && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">💬</span>
+                <span className="font-medium">Telegram:</span>
                 <a href={`https://t.me/${cvData.personalInfo.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  Telegram: {cvData.personalInfo.telegram}
+                  {cvData.personalInfo.telegram}
                 </a>
               </div>
             )}
             {cvData.personalInfo.github && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">🐙</span>
+                <span className="font-medium">GitHub:</span>
                 <a href={`https://${cvData.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  GitHub: {cvData.personalInfo.github}
+                  {cvData.personalInfo.github}
                 </a>
               </div>
             )}
             {cvData.personalInfo.website && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">🌐</span>
+                <span className="font-medium">Website:</span>
                 <a href={`https://${cvData.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   {cvData.personalInfo.website}
                 </a>
@@ -218,16 +218,16 @@ function CV() {
             )}
             {cvData.personalInfo.setka && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">🔗</span>
+                <span className="font-medium">Setka:</span>
                 <a href={cvData.personalInfo.setka} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  Setka: {cvData.personalInfo.setka}
+                  {cvData.personalInfo.setka}
                 </a>
               </div>
             )}
             {cvData.personalInfo.location && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">📍</span>
-                <span>Проживает: {cvData.personalInfo.location}</span>
+                <span className="font-medium">Location:</span>
+                <span>{cvData.personalInfo.location}</span>
               </div>
             )}
           </div>
@@ -235,10 +235,10 @@ function CV() {
           {(cvData.personalInfo.citizenship || cvData.personalInfo.relocation || cvData.personalInfo.businessTrips) && (
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400">
               {cvData.personalInfo.citizenship && (
-                <p>Гражданство: {cvData.personalInfo.citizenship}{cvData.personalInfo.workPermit && `, есть разрешение на работу: ${cvData.personalInfo.workPermit}`}</p>
+                <p>Citizenship: {cvData.personalInfo.citizenship}{cvData.personalInfo.workPermit && `, Work permit: ${cvData.personalInfo.workPermit}`}</p>
               )}
               <p className="mt-1">
-                {cvData.personalInfo.relocation}, {cvData.personalInfo.businessTrips?.toLowerCase()}
+                Relocation: {cvData.personalInfo.relocation}, {cvData.personalInfo.businessTrips?.toLowerCase()}
               </p>
             </div>
           )}
@@ -247,31 +247,31 @@ function CV() {
         {/* Desired Position */}
         <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-            Желаемая должность и зарплата
+            Desired Position and Salary
           </h2>
           <div className="space-y-3 text-gray-700 dark:text-gray-300">
             <p className="text-lg font-semibold">{cvData.desiredPosition.title}</p>
             {cvData.desiredPosition.specializations && cvData.desiredPosition.specializations.length > 0 && (
               <div>
-                <span className="font-medium">Специализации:</span>
+                <span className="font-medium">Specializations:</span>
                 <p>{cvData.desiredPosition.specializations.join(', ')}</p>
               </div>
             )}
             {cvData.desiredPosition.employmentType && cvData.desiredPosition.employmentType.length > 0 && (
               <div>
-                <span className="font-medium">Тип занятости:</span>
+                <span className="font-medium">Employment Type:</span>
                 <p>{cvData.desiredPosition.employmentType.join(', ')}</p>
               </div>
             )}
             {cvData.desiredPosition.workFormat && cvData.desiredPosition.workFormat.length > 0 && (
               <div>
-                <span className="font-medium">Формат работы:</span>
+                <span className="font-medium">Work Format:</span>
                 <p>{cvData.desiredPosition.workFormat.join(', ')}</p>
               </div>
             )}
             {cvData.desiredPosition.commuteTime && (
               <div>
-                <span className="font-medium">Желательное время в пути до работы:</span>
+                <span className="font-medium">Desired Commute Time:</span>
                 <p>{cvData.desiredPosition.commuteTime}</p>
               </div>
             )}
@@ -282,7 +282,7 @@ function CV() {
         {cvData.cv.experience.length > 0 && (
           <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
-              Опыт работы — {cvData.cv.experience[0].duration || '5 месяцев'}
+              Work Experience - {cvData.cv.experience[0].duration || '5 months'}
             </h2>
           </section>
         )}

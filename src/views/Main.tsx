@@ -229,9 +229,9 @@ function Main() {
       <section className="w-full max-w-4xl mx-auto p-7 text-center">
         <Link 
           to="/cv" 
-          className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-block px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
         >
-          View Full CV →
+          View Full CV
         </Link>
       </section>
     </>
