@@ -157,7 +157,7 @@ function Main() {
   if (dataError) {
     return (
       <div role="alert" className="p-4 text-red-600 bg-red-50 rounded m-4">
-        <h2 className="text-lg font-semibold">Error loading site data</h2>
+        <h2 className="text-lg font-semibold">Ошибка загрузки данных сайта</h2>
         <p>{dataError}</p>
       </div>
     )
@@ -166,7 +166,7 @@ function Main() {
   if (!siteData) {
     return (
       <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-black">Loading...</div>
+        <div className="animate-pulse text-black">Загрузка...</div>
       </div>
     )
   }
@@ -174,7 +174,7 @@ function Main() {
   if (state.isLoading) {
     return (
       <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-black">Loading...</div>
+        <div className="animate-pulse text-black">Загрузка...</div>
       </div>
     )
   }
@@ -182,7 +182,7 @@ function Main() {
   if (state.error) {
     return (
       <div role="alert" className="p-4 text-red-600 bg-red-50 rounded m-4">
-        <h2 className="text-lg font-semibold">Error loading content</h2>
+        <h2 className="text-lg font-semibold">Ошибка загрузки контента</h2>
         <p>{state.error}</p>
       </div>
     )
@@ -231,7 +231,7 @@ function Main() {
           to="/cv" 
           className="inline-block px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
         >
-          View Full CV
+          Посмотреть полное резюме
         </Link>
       </section>
     </>
