@@ -1,16 +1,16 @@
-import { HelmetProvider } from "react-helmet-async"
 import { BrowserRouter, Route, Routes } from "react-router"
+import ErrorBoundary from "./components/ErrorBoundary"
 import Main from "./views/Main"
 
 function App() {
   return (
-    <HelmetProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ErrorBoundary>
         <Routes>
           <Route index element={<Main />} />
         </Routes>
-      </BrowserRouter>
-    </HelmetProvider>
+      </ErrorBoundary>
+    </BrowserRouter>
   )
 }
 
