@@ -131,7 +131,7 @@ function CV() {
   if (isLoading) {
     return (
       <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-gray-600 dark:text-gray-400">Loading CV...</div>
+        <div className="animate-pulse text-black">Loading CV...</div>
       </div>
     )
   }
@@ -154,7 +154,7 @@ function CV() {
       <nav className="w-full max-w-4xl mx-auto p-7">
         <Link 
           to="/" 
-          className="text-gray-600 dark:text-gray-400 hover:underline inline-flex items-center gap-2"
+          className="text-black hover:underline inline-flex items-center gap-2"
         >
           Back to Home
         </Link>
@@ -165,21 +165,21 @@ function CV() {
         <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+              <h1 className="text-3xl font-bold text-black mb-2">
                 {cvData.personalInfo.name}
               </h1>
-              <p className="text-xl text-gray-700 dark:text-gray-300 font-semibold">
+              <p className="text-xl text-black font-semibold">
                 {cvData.desiredPosition.title}
               </p>
             </div>
             {cvData.personalInfo.lastUpdated && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-black">
                 CV updated {cvData.personalInfo.lastUpdated}
               </p>
             )}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700 dark:text-gray-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-black">
             {cvData.personalInfo.phone && (
               <div className="flex items-center gap-2">
                 <span className="font-medium">Phone:</span>
@@ -233,7 +233,7 @@ function CV() {
           </div>
           
           {(cvData.personalInfo.citizenship || cvData.personalInfo.relocation || cvData.personalInfo.businessTrips) && (
-            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 text-sm text-black">
               {cvData.personalInfo.citizenship && (
                 <p>Citizenship: {cvData.personalInfo.citizenship}{cvData.personalInfo.workPermit && `, Work permit: ${cvData.personalInfo.workPermit}`}</p>
               )}
@@ -246,10 +246,10 @@ function CV() {
 
         {/* Desired Position */}
         <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
             Desired Position and Salary
           </h2>
-          <div className="space-y-3 text-gray-700 dark:text-gray-300">
+          <div className="space-y-3 text-black">
             <p className="text-lg font-semibold">{cvData.desiredPosition.title}</p>
             {cvData.desiredPosition.specializations && cvData.desiredPosition.specializations.length > 0 && (
               <div>
@@ -281,7 +281,7 @@ function CV() {
         {/* Experience Summary */}
         {cvData.cv.experience.length > 0 && (
           <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 border-b-2 border-blue-500 pb-1">
+            <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
               Work Experience - {cvData.cv.experience[0].duration || '5 months'}
             </h2>
           </section>

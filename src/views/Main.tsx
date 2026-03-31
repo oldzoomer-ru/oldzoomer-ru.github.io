@@ -166,7 +166,7 @@ function Main() {
   if (!siteData) {
     return (
       <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-gray-600">Loading...</div>
+        <div className="animate-pulse text-black">Loading...</div>
       </div>
     )
   }
@@ -174,7 +174,7 @@ function Main() {
   if (state.isLoading) {
     return (
       <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-gray-600">Loading...</div>
+        <div className="animate-pulse text-black">Loading...</div>
       </div>
     )
   }
