@@ -10,10 +10,10 @@
     "name": "Егор Гаврилов",
     "jobTitle": "Java Backend Developer",
     "email": "work@oldzoomer.ru",
-    "description": "Java Backend-разработчик, сертифицированный Vaadin и Cloud.ru специалист. Эксперт в Spring Boot и системной архитектуре.",
+    "description": "Java Backend-разработчик, сертифицированный Vaadin и Cloud.ru специалист.",
     "sameAs": [
       "https://t.me/oldzoomer_ru",
-      "https://github.com"
+      "https://github.com/oldzoomer-ru"
     ],
     "knowsAbout": [
       "Java 21",
@@ -26,19 +26,13 @@
   },
   "projects": [
     {
-      "name": "NodehistJ",
-      "description": "Архивация и анализ 40-летней истории Фидонета",
-      "codeRepository": "https://github.com/nodehistj",
-      "programmingLanguage": "Java"
-    },
-    {
       "name": "StingrayTV Alice",
       "description": "IoT-шлюз для управления ресивером Триколора через Алису",
-      "codeRepository": "https://github.com/stingraytv-alice",
+      "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
       "programmingLanguage": "Java"
     }
   ],
   "content": {
-    "mainPageFileUrl": "https://raw.githubusercontent.com/oldzoomer-ru/oldzoomer-ru/main/README.md"
+    "mainPageFileUrl": "https://github.com/oldzoomer-ru/oldzoomer-ru/raw/refs/heads/master/README.md"
   }
 }
