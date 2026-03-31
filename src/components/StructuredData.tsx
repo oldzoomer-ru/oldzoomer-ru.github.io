@@ -1,16 +1,13 @@
-import { Helmet } from "react-helmet-async"
-
 interface StructuredDataProps {
   data: object
 }
 
 function StructuredData({ data }: StructuredDataProps) {
   return (
-    <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(data)}
-      </script>
-    </Helmet>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
   )
 }
 
