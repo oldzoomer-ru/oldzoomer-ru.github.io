@@ -278,15 +278,6 @@ function CV() {
           </div>
         </section>
 
-        {/* Experience Summary */}
-        {cvData.cv.experience.length > 0 && (
-          <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
-              Work Experience - {cvData.cv.experience[0].duration || '5 months'}
-            </h2>
-          </section>
-        )}
-
         {/* CV Blocks */}
         <CVBlock data={cvData.cv} />
       </main>
