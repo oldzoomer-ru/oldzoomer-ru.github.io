@@ -204,7 +204,7 @@ function CVBlock({ data }: CVBlockProps) {
                     {skill.items.map((item, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-black rounded text-sm"
+                        className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-white rounded text-sm"
                       >
                         {item}
                       </span>
@@ -224,7 +224,7 @@ function CVBlock({ data }: CVBlockProps) {
             {data.skills.technical.map((skill, i) => (
               <span
                 key={i}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-black rounded text-sm"
+                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-white rounded text-sm"
               >
                 {skill}
               </span>
