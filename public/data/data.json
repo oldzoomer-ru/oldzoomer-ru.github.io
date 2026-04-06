@@ -1,0 +1,96 @@
+{
+  "$schema": "./schema/data.schema.json",
+  "metadata": {
+    "title": "Егор Гаврилов — Java Backend Developer",
+    "description": "Java Backend-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
+    "author": "Егор Гаврилов",
+    "url": "https://oldzoomer.ru",
+    "language": "ru",
+    "updatedAt": "2026-03-31T05:30:00Z"
+  },
+  "person": {
+    "name": "Егор Гаврилов",
+    "jobTitle": "Java Backend Developer",
+    "email": "work@oldzoomer.ru",
+    "description": "Java Backend-разработчик, сертифицированный Vaadin и Cloud.ru специалист.",
+    "sameAs": [
+      "https://t.me/oldzoomer_ru",
+      "https://github.com/oldzoomer-ru"
+    ],
+    "knowsAbout": [
+      "Java 21",
+      "Spring Boot",
+      "Kafka",
+      "PostgreSQL",
+      "Docker",
+      "FidoNet"
+    ]
+  },
+  "content": {
+    "mainPageFileUrl": "https://raw.githubusercontent.com/oldzoomer-ru/oldzoomer-ru/refs/heads/master/README.md"
+  },
+  "projects": [
+    {
+      "name": "StingrayTV Alice",
+      "description": "IoT-шлюз для управления ресивером Триколора через Алису",
+      "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
+      "programmingLanguage": "Java"
+    }
+  ],
+  "cv": {
+    "personal": {
+      "name": "Гаврилов Егор Денисович",
+      "email": "work@oldzoomer.ru",
+      "telegram": "@oldzoomer_ru",
+      "setka": "https://set.ki/Dzarbxm",
+      "github": "https://github.com/oldzoomer-ru",
+      "website": "https://oldzoomer.ru",
+      "location": "Кстово",
+      "citizenship": "RU"
+    },
+    "desiredPosition": {
+      "title": "Java-разработчик (Spring)",
+      "specializations": ["Программист, разработчик"],
+      "employmentType": ["полная занятость", "стажировка"],
+      "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
+    },
+    "summary": "- Backend-разработчик, специализируюсь на стеке Java / Spring.\n\n- Опыт миграции legacy-сервиса на современные технологии (Spring Boot, Vaadin) в GovTech-проекте.\n\n- Устранил ~10 критических ошибок в генерации отчетов, что привело к стабилизации работы сервиса для конечных пользователей.\n\n- Навыки DevOps: развертывание и поддержка приложений, автоматизация инфраструктуры.\n\nРассматриваю удалёнку по всей РФ (в т. ч. и в других часовых поясах), гибрид в Нижнем Новгороде, и гибрид/офис в Кстово.",
+    "experience": [
+      {
+        "position": "Java-разработчик (fullstack)",
+        "company": "AISA",
+        "location": "Москва",
+        "startDate": "2024-04-01",
+        "endDate": "2024-08-31",
+        "durationMonths": 5,
+        "description": [
+          "Перевел ключевой модуль планирования бюджета с legacy-платформы на современный стек (Spring Boot, Vaadin), что сняло зависимость от Windows Server и упростило дальнейшую поддержку.",
+          "Стабилизировал работу сервиса генерации отчетов (Word, PDF), устранив ~10 критических ошибок, приводивших к его падениям под нагрузкой.",
+          "Разработал ~20 UI-компонентов на Vaadin для точного воспроизведения интерфейса старой системы, обеспечив бесшовный и привычный пользовательский опыт для сотрудников."
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institution": "Международный Восточно-Европейский колледж",
+        "location": "Ижевск",
+        "degree": "Среднее специальное",
+        "field": "Информационные системы и программирование",
+        "graduationYear": 2026
+      }
+    ],
+    "languages": [
+      {
+        "language": "ru",
+        "level": "native"
+      },
+      {
+        "language": "en",
+        "level": "b1"
+      }
+    ],
+    "skills": {
+      "technical": ["Java", "Spring Framework", "Docker", "Gradle", "Apache Kafka", "SQL", "Apache Maven", "Mockito", "API", "JUnit", "Flyway", "Hibernate", "Redis", "Keycloak", "OIDC", "Linux"]
+    }
+  }
+}
