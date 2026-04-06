@@ -31,8 +31,8 @@ class ErrorBoundary extends Component<Props, State> {
       }
       return (
         <div role="alert" className="p-4 text-red-600 bg-red-50 rounded">
-          <h2 className="text-lg font-semibold">Something went wrong</h2>
-          <p>Please refresh the page or try again later.</p>
+          <h2 className="text-lg font-semibold">Что-то пошло не так</h2>
+          <p>Пожалуйста, обновите страницу или попробуйте позже.</p>
         </div>
       )
     }
