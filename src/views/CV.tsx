@@ -54,7 +54,6 @@ interface CVProject {
 
 import { useEffect, useState } from "react"
 import CVBlock from "../components/CVBlock"
-import { Link } from "react-router"
 
 type CVFullData = {
   personal: CVPersonalInfo
@@ -151,15 +150,6 @@ function CV() {
 
   return (
     <>
-      <nav className="w-full max-w-4xl mx-auto p-7">
-        <Link 
-          to="/" 
-          className="text-black hover:underline inline-flex items-center gap-2"
-        >
-          На главную
-        </Link>
-      </nav>
-      
       <main className="w-full max-w-4xl mx-auto p-7">
         {/* Personal Info Header */}
         <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
