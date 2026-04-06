@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Site and CV Data Schema",
+  "description": "Schema for combined site and CV data",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "author": { "type": "string" },
+        "url": { "type": "string" },
+        "language": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["title", "description", "author", "url", "language"]
+    },
+    "person": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "email": { "type": "string" },
+        "description": { "type": "string" },
+        "sameAs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "knowsAbout": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["name", "jobTitle", "email", "description", "sameAs", "knowsAbout"]
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "mainPageFileUrl": { "type": "string" }
+      },
+      "required": ["mainPageFileUrl"]
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "codeRepository": { "type": "string" },
+          "programmingLanguage": { "type": "string" }
+        },
+        "required": ["name", "description", "codeRepository", "programmingLanguage"]
+      }
+    },
+    "cv": {
+      "type": "object",
+      "properties": {
+        "personal": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string" },
+            "telegram": { "type": "string" },
+            "setka": { "type": "string" },
+            "github": { "type": "string" },
+            "website": { "type": "string" },
+            "location": { "type": "string" },
+            "citizenship": { "type": "string" }
+          },
+          "required": ["name"]
+        },
+        "desiredPosition": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "specializations": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "employmentType": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "workFormat": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["title"]
+        },
+        "summary": { "type": "string" },
+        "experience": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "position": { "type": "string" },
+              "company": { "type": "string" },
+              "location": { "type": "string" },
+              "startDate": { "type": "string" },
+              "endDate": { "type": "string" },
+              "durationMonths": { "type": "integer", "minimum": 0 },
+              "description": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "required": ["position", "company", "startDate", "description"]
+          }
+        },
+        "education": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "institution": { "type": "string" },
+              "location": { "type": "string" },
+              "degree": { "type": "string" },
+              "field": { "type": "string" },
+              "graduationYear": { "type": "integer", "minimum": 1900, "maximum": 2100 }
+            },
+            "required": ["institution", "degree"]
+          }
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "language": { "type": "string", "pattern": "^[a-z]{2,3}$" },
+              "level": { "type": "string" }
+            },
+            "required": ["language", "level"]
+          }
+        },
+        "skills": {
+          "type": "object",
+          "properties": {
+            "technical": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["technical"]
+        }
+      },
+      "required": ["personal", "desiredPosition", "experience", "education", "skills"]
+    }
+  },
+  "required": ["metadata", "person", "content", "projects", "cv"]
+}
