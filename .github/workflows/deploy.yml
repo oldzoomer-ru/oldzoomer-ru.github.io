@@ -24,11 +24,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate JSON schema
+        run: |
+          # Install ajv-cli locally and validate JSON schema
+          npm install ajv-cli
+          npx ajv validate -s public/data/schema/data.schema.json -d public/data/data.json
+          # Also validate JSON syntax
+          node -e "JSON.parse(require('fs').readFileSync('public/data/data.json', 'utf8'))"
 
       - name: Build
         run: npm run build
