@@ -17,6 +17,6 @@
     /* Используем переменную из темы */
     font-family: var(--font-family-cantarell);
     line-height: 1.5;
-    @apply antialiased text-gray-900 dark:text-gray-100;
+    @apply antialiased text-black dark:text-white;
   }
 }
