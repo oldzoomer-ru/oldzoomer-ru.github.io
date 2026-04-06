@@ -197,7 +197,7 @@ function CV() {
             )}
             {cvData.personal.setka && (
               <div className="flex items-center gap-2">
-                <span className="font-medium">Setka:</span>
+                <span className="font-medium">Сетка:</span>
                 <a href={cvData.personal.setka} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   {cvData.personal.setka}
                 </a>
