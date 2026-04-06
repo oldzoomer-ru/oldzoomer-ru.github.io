@@ -223,6 +223,16 @@ function Main() {
           <Markdown remarkPlugins={[remarkGfm]}>{state.content ?? ""}</Markdown>
         </article>
       </main>
+      
+      {/* CV Link */}
+      <section className="w-full max-w-4xl mx-auto p-7 text-center">
+        <Link 
+          to="/cv" 
+          className="inline-block px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          Посмотреть полное резюме
+        </Link>
+      </section>
     </>
   )
 }
