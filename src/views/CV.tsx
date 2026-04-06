@@ -54,6 +54,7 @@ interface CVProject {
 
 import { useEffect, useState } from "react"
 import CVBlock from "../components/CVBlock"
+import StructuredData from "../components/StructuredData"
 
 type CVFullData = {
   personal: CVPersonalInfo
@@ -110,6 +111,37 @@ function CV() {
         if (isMounted) {
           setCvData(cvData)
           setIsLoading(false)
+          
+          // Update document title and meta tags dynamically
+          document.title = cvData.personal.name + ' — Резюме'
+          
+          // Update meta description
+          const metaDescription = document.querySelector('meta[name="description"]')
+          if (metaDescription) {
+            metaDescription.setAttribute('content', cvData.summary || '')
+          }
+          
+          // Update canonical URL
+          const linkCanonical = document.querySelector('link[rel="canonical"]')
+          if (linkCanonical) {
+            linkCanonical.setAttribute('href', window.location.href)
+          }
+          
+          // Update Open Graph tags
+          const ogTitle = document.querySelector('meta[property="og:title"]')
+          if (ogTitle) {
+            ogTitle.setAttribute('content', cvData.personal.name + ' — Резюме')
+          }
+          
+          const ogDescription = document.querySelector('meta[property="og:description"]')
+          if (ogDescription) {
+            ogDescription.setAttribute('content', cvData.summary || '')
+          }
+          
+          const ogUrl = document.querySelector('meta[property="og:url"]')
+          if (ogUrl) {
+            ogUrl.setAttribute('content', window.location.href)
+          }
         }
       } catch (err) {
         if (isMounted) {
@@ -148,8 +180,75 @@ function CV() {
     return null
   }
 
+  // Generate structured data from CV data
+  const cvStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `/data/data.json`,
+        "name": cvData.personal.name,
+        "jobTitle": cvData.desiredPosition.title,
+        "email": cvData.personal.email,
+        "sameAs": [
+          cvData.personal.github && `https://${cvData.personal.github}`,
+          cvData.personal.website,
+          cvData.personal.setka
+        ].filter(Boolean),
+        "description": cvData.summary || ""
+      },
+      ...cvData.experience.map((exp) => ({
+        "@type": "WorkExperience",
+        "jobTitle": exp.position,
+        "organization": {
+          "@type": "Organization",
+          "name": exp.company,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": exp.location
+          }
+        },
+        "startDate": exp.startDate,
+        "endDate": exp.endDate,
+        "description": exp.description.join(". ")
+      })),
+      ...cvData.education.map((edu) => ({
+        "@type": "EducationOccupationalCredential",
+        "name": edu.degree,
+        "educationEstablishment": {
+          "@type": "EducationalOrganization",
+          "name": edu.institution,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": edu.location
+          }
+        },
+        "credentialCategory": edu.field || "Academic",
+        "dateCreated": `/${edu.graduationYear || new Date().getFullYear()}`
+      })),
+      ...(cvData.projects || []).map((project) => ({
+        "@type": "CreativeWork",
+        "name": project.name,
+        "description": project.description,
+        "audience": {
+          "@type": "Audience",
+          "audienceType": ["Developer", "Technologist"]
+        },
+        "inLanguage": "en",
+        "url": project.url,
+        "codeRepository": project.repository
+      })),
+      ...(cvData.languages || []).map((lang) => ({
+        "@type": "LanguageAbility",
+        "name": lang.language,
+        "proficiency": lang.level
+      }))
+    ]
+  }
+
   return (
     <>
+      <StructuredData data={cvStructuredData} />
       <main className="w-full max-w-4xl mx-auto p-7">
         {/* Personal Info Header */}
         <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
