@@ -144,7 +144,7 @@ function CVBlock({ data }: CVBlockProps) {
           </h2>
           <div className="space-y-6">
             {data.experience.map((exp, index) => (
-              <div key={index} className="relative pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+              <div key={index} className="relative pl-4 border-l-2 border-gray-700">
                 <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-500"></div>
                 <div className="mb-1">
                   <h3 className="text-lg font-semibold text-black">
@@ -183,7 +183,7 @@ function CVBlock({ data }: CVBlockProps) {
           </h2>
           <div className="space-y-4">
             {data.education.map((edu, index) => (
-              <div key={index} className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+              <div key={index} className="pl-4 border-l-2 border-gray-700">
                 <h3 className="text-lg font-semibold text-black">
                   {edu.institution}
                 </h3>
@@ -235,7 +235,7 @@ function CVBlock({ data }: CVBlockProps) {
                     {skill.items.map((item, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-white rounded text-sm"
+                        className="px-3 py-1 bg-gray-700 text-white rounded text-sm"
                       >
                         {item}
                       </span>
@@ -255,7 +255,7 @@ function CVBlock({ data }: CVBlockProps) {
             {data.skills.technical.map((skill, i) => (
               <span
                 key={i}
-                className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-white rounded text-sm"
+                className="px-3 py-1 bg-gray-700 text-white rounded text-sm"
               >
                 {skill}
               </span>
@@ -274,7 +274,7 @@ function CVBlock({ data }: CVBlockProps) {
             {data.projects.map((project, index) => (
               <div
                 key={index}
-                className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+                className="p-4 bg-gray-800 rounded-lg border border-gray-700 hover:shadow-md transition-shadow"
               >
                 <h3 className="text-lg font-semibold text-black mb-2">
                   {project.name}
@@ -287,7 +287,7 @@ function CVBlock({ data }: CVBlockProps) {
                     {project.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-black rounded text-xs"
+                        className="px-2 py-1 bg-gray-700 text-black rounded text-xs"
                       >
                         {tech}
                       </span>

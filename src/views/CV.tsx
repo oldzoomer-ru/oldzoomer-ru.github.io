@@ -169,7 +169,7 @@ function CV() {
 
   if (error) {
     return (
-      <div role="alert" className="p-4 text-red-600 bg-red-50 dark:bg-red-900/20 rounded m-4">
+      <div role="alert" className="p-4 text-red-600 bg-red-900/20 rounded m-4">
         <h2 className="text-lg font-semibold">Ошибка загрузки резюме</h2>
         <p>{error}</p>
       </div>
@@ -251,7 +251,7 @@ function CV() {
       <StructuredData data={cvStructuredData} />
       <main className="w-full max-w-4xl mx-auto p-7">
         {/* Personal Info Header */}
-        <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+        <section className="mb-8 pb-6 border-b border-gray-700">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl font-bold text-black mb-2">
@@ -318,9 +318,9 @@ function CV() {
         </section>
 
         {/* Desired Position */}
-        <section className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+        <section className="mb-8 pb-6 border-b border-gray-700">
           <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
-            Желаемая должность и зарплата
+            Желаемая должность
           </h2>
           <div className="space-y-3 text-black">
             <p className="text-lg font-semibold">{cvData.desiredPosition.title}</p>
