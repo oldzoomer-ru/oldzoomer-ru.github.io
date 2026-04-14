@@ -23,20 +23,11 @@ interface CVDesiredPosition {
   commuteTime?: string
 }
 
-interface CVCertification {
-  name: string
-  issuer: string
-  date?: string
-  credentialId?: string
-  credentialUrl?: string
-}
-
 interface CVExperience {
   position: string
   company: string
   startDate: string
   endDate?: string
-  durationMonths?: number
   description: string[]
   location?: string
 }
@@ -45,7 +36,8 @@ interface CVEducation {
   institution: string
   degree: string
   field?: string
-  graduationYear?: number
+  graduationYearStart?: number
+  graduationYearEnd?: number
   location?: string
 }
 
@@ -64,27 +56,22 @@ interface CVProject {
   description: string
   technologies: string[]
   url?: string
-  repository?: string
+  codeRepository?: string
 }
 
-interface CVData {
+interface CVFullData {
+  personal: CVPersonalInfo
+  desiredPosition: CVDesiredPosition
   summary?: string
   experience: CVExperience[]
   education: CVEducation[]
-  certifications?: CVCertification[]
   languages?: CVLanguage[]
   skills: CVSkill[] | { technical: string[] }
   projects?: CVProject[]
 }
 
-interface CVFullData {
-  personalInfo: CVPersonalInfo
-  desiredPosition: CVDesiredPosition
-  cv: CVData
-}
-
 interface CVBlockProps {
-  data: CVData
+  data: CVFullData
 }
 
 function CVBlock({ data }: CVBlockProps) {
@@ -160,7 +147,7 @@ function CVBlock({ data }: CVBlockProps) {
                   )}
                 </div>
                 <p className="text-sm text-black mb-2">
-                  {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : 'н.в.'}{exp.durationMonths && ` (${exp.durationMonths} месяцев)`}
+                  {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : 'н.в.'}
                 </p>
                 {exp.description.length > 0 && (
                   <ul className="list-disc list-inside space-y-1 text-black">
@@ -192,8 +179,9 @@ function CVBlock({ data }: CVBlockProps) {
                   {edu.field && ` - ${edu.field}`}
                 </p>
                 <p className="text-sm text-black">
-                  {edu.graduationYear ? `Окончание: ${edu.graduationYear}` : ''}
-                  {edu.location && ` - ${edu.location}`}
+                  {edu.graduationYearStart ? `${edu.graduationYearStart} - ` : ''}
+                  {edu.graduationYearEnd ? `${edu.graduationYearEnd}` : ''}
+                  {edu.location && `, ${edu.location}`}
                 </p>
               </div>
             ))}
@@ -276,48 +264,24 @@ function CVBlock({ data }: CVBlockProps) {
                 key={index}
                 className="p-4 bg-gray-800 rounded-lg border border-gray-700 hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-semibold text-black mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {project.name}
                 </h3>
-                <p className="text-black mb-3">
+                <p className="text-white mb-3">
                   {project.description}
                 </p>
-                {project.technologies.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {project.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-1 bg-gray-700 text-black rounded text-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {(project.url || project.repository) && (
-                  <div className="flex gap-3">
-                    {project.url && (
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-black hover:underline"
-                      >
-                        Сайт проекта
-                      </a>
-                    )}
-                    {project.repository && (
-                      <a
-                        href={project.repository}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-black hover:underline"
-                      >
-                        Репозиторий
-                      </a>
-                    )}
-                  </div>
-                )}
+                <div className="flex gap-3">
+                  {project.codeRepository && (
+                    <a
+                      href={project.codeRepository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-white underline"
+                    >
+                      Репозиторий
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -329,10 +293,8 @@ function CVBlock({ data }: CVBlockProps) {
 
 export default CVBlock
 export type {
-  CVData,
   CVExperience,
   CVEducation,
-  CVCertification,
   CVSkill,
   CVProject,
   CVPersonalInfo,
