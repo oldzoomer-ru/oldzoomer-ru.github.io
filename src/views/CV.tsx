@@ -1,5 +1,7 @@
 interface CVPersonalInfo {
   name: string
+  gender?: string
+  phone?: string
   email?: string
   telegram?: string
   setka?: string
@@ -7,6 +9,10 @@ interface CVPersonalInfo {
   website?: string
   location?: string
   citizenship?: string
+  workPermit?: string
+  relocation?: string
+  businessTrips?: string
+  lastUpdated?: string
 }
 
 interface CVDesiredPosition {
@@ -14,6 +20,7 @@ interface CVDesiredPosition {
   specializations?: string[]
   employmentType?: string[]
   workFormat?: string[]
+  commuteTime?: string
 }
 
 interface CVExperience {
@@ -21,7 +28,6 @@ interface CVExperience {
   company: string
   startDate: string
   endDate?: string
-  durationMonths?: number
   description: string[]
   location?: string
 }
@@ -30,7 +36,8 @@ interface CVEducation {
   institution: string
   degree: string
   field?: string
-  graduationYear?: number
+  graduationYearStart?: number
+  graduationYearEnd?: number
   location?: string
 }
 
@@ -52,11 +59,7 @@ interface CVProject {
   repository?: string
 }
 
-import { useEffect, useState } from "react"
-import CVBlock from "../components/CVBlock"
-import StructuredData from "../components/StructuredData"
-
-type CVFullData = {
+interface CVFullData {
   personal: CVPersonalInfo
   desiredPosition: CVDesiredPosition
   summary?: string
@@ -66,6 +69,10 @@ type CVFullData = {
   skills: CVSkill[] | { technical: string[] }
   projects?: CVProject[]
 }
+
+import { useEffect, useState } from "react"
+import CVBlock from "../components/CVBlock"
+import StructuredData from "../components/StructuredData"
 
 function CV() {
   const [cvData, setCvData] = useState<CVFullData | null>(null)
@@ -88,25 +95,7 @@ function CV() {
         }
         
         // Transform to CVFullData interface
-        const cvData: CVFullData = {
-          personal: fullData.cv.personal || { name: fullData.cv.personalInfo?.name || '' },
-          desiredPosition: fullData.cv.desiredPosition || { title: '' },
-          summary: fullData.cv.summary,
-          experience: fullData.cv.experience || [],
-          education: fullData.cv.education || [],
-          languages: fullData.cv.languages || [],
-          skills: fullData.cv.skills || { technical: [] },
-          projects: fullData.cv.projects
-        }
-        
-        // Handle legacy structure compatibility
-        if (fullData.cv.cv) {
-          cvData.summary = fullData.cv.cv.summary || cvData.summary
-          cvData.experience = fullData.cv.cv.experience || cvData.experience
-          cvData.education = fullData.cv.cv.education || cvData.education
-          cvData.languages = fullData.cv.cv.languages || cvData.languages
-          cvData.skills = fullData.cv.cv.skills || cvData.skills
-        }
+        const cvData: CVFullData = fullData.cv
         
         if (isMounted) {
           setCvData(cvData)
@@ -224,7 +213,7 @@ function CV() {
           }
         },
         "credentialCategory": edu.field || "Academic",
-        "dateCreated": `/${edu.graduationYear || new Date().getFullYear()}`
+        "dateCreated": `/${edu.graduationYearEnd || new Date().getFullYear()}`
       })),
       ...(cvData.projects || []).map((project) => ({
         "@type": "CreativeWork",
@@ -347,14 +336,7 @@ function CV() {
         </section>
 
         {/* CV Blocks */}
-        <CVBlock data={{
-          summary: cvData.summary,
-          experience: cvData.experience,
-          education: cvData.education,
-          languages: cvData.languages,
-          skills: cvData.skills,
-          projects: cvData.projects
-        }} />
+        <CVBlock data={cvData} />
       </main>
     </>
   )

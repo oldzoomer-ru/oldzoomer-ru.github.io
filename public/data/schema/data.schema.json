@@ -41,19 +41,6 @@
       },
       "required": ["mainPageFileUrl"]
     },
-    "projects": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "description": { "type": "string" },
-          "codeRepository": { "type": "string" },
-          "programmingLanguage": { "type": "string" }
-        },
-        "required": ["name", "description", "codeRepository", "programmingLanguage"]
-      }
-    },
     "cv": {
       "type": "object",
       "properties": {
@@ -101,7 +88,6 @@
               "location": { "type": "string" },
               "startDate": { "type": "string" },
               "endDate": { "type": "string" },
-              "durationMonths": { "type": "integer", "minimum": 0 },
               "description": {
                 "type": "array",
                 "items": { "type": "string" }
@@ -119,9 +105,23 @@
               "location": { "type": "string" },
               "degree": { "type": "string" },
               "field": { "type": "string" },
-              "graduationYear": { "type": "integer", "minimum": 1900, "maximum": 2100 }
+              "graduationYearStart": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+              "graduationYearEnd": { "type": "integer", "minimum": 1900, "maximum": 2100 }
             },
             "required": ["institution", "degree"]
+          }
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "codeRepository": { "type": "string" },
+              "programmingLanguage": { "type": "string" }
+            },
+            "required": ["name", "description", "codeRepository", "programmingLanguage"]
           }
         },
         "languages": {
@@ -146,8 +146,8 @@
           "required": ["technical"]
         }
       },
-      "required": ["personal", "desiredPosition", "experience", "education", "skills"]
+      "required": ["personal", "desiredPosition", "skills"]
     }
   },
-  "required": ["metadata", "person", "content", "projects", "cv"]
+  "required": ["metadata", "person", "content", "cv"]
 }
