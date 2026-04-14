@@ -29,14 +29,6 @@
   "content": {
     "mainPageFileUrl": "https://raw.githubusercontent.com/oldzoomer-ru/oldzoomer-ru/refs/heads/master/README.md"
   },
-  "projects": [
-    {
-      "name": "StingrayTV Alice",
-      "description": "IoT-шлюз для управления ресивером Триколора через Алису",
-      "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
-      "programmingLanguage": "Java"
-    }
-  ],
   "cv": {
     "personal": {
       "name": "Гаврилов Егор Денисович",
@@ -54,19 +46,17 @@
       "employmentType": ["полная занятость", "стажировка"],
       "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
     },
-    "summary": "- Backend-разработчик, специализируюсь на стеке Java / Spring.\n\n- Опыт миграции legacy-сервиса на современные технологии (Spring Boot, Vaadin) в GovTech-проекте.\n\n- Устранил ~10 критических ошибок в генерации отчетов, что привело к стабилизации работы сервиса для конечных пользователей.\n\n- Навыки DevOps: развертывание и поддержка приложений, автоматизация инфраструктуры.\n\nРассматриваю удалёнку по всей РФ (в т. ч. и в других часовых поясах), гибрид в Нижнем Новгороде, и гибрид/офис в Кстово.",
+    "summary": "- Backend-разработчик, специализируюсь на стеке Java / Spring.\n- Навыки DevOps: развертывание и поддержка приложений, автоматизация инфраструктуры.\n- Общий опыт в ИИ: MLOps, локальные ИИ-модели, работа с ИИ-агентами (Continue, Roo Code, VeAl).\n\nРассматриваю удалёнку по всей РФ (в т. ч. и в других часовых поясах), гибрид в Нижнем Новгороде, и гибрид/офис в Кстово.",
     "experience": [
       {
-        "position": "Java-разработчик (fullstack)",
+        "position": "Java-разработчик",
         "company": "AISA",
-        "location": "Москва",
+        "location": "Санкт-Петербург",
         "startDate": "2024-04-01",
         "endDate": "2024-08-31",
-        "durationMonths": 5,
         "description": [
-          "Перевел ключевой модуль планирования бюджета с legacy-платформы на современный стек (Spring Boot, Vaadin), что сняло зависимость от Windows Server и упростило дальнейшую поддержку.",
-          "Стабилизировал работу сервиса генерации отчетов (Word, PDF), устранив ~10 критических ошибок, приводивших к его падениям под нагрузкой.",
-          "Разработал ~20 UI-компонентов на Vaadin для точного воспроизведения интерфейса старой системы, обеспечив бесшовный и привычный пользовательский опыт для сотрудников."
+          "Перевел систему планирования бюджета региона с Microsoft Access на современный стек (Spring, Vaadin), что сняло зависимость от Windows и упростило дальнейшую поддержку.",
+          "Разработал UI-компонентов на Vaadin для точного воспроизведения интерфейса старой системы, обеспечив бесшовный и привычный пользовательский опыт для сотрудников."
         ]
       }
     ],
@@ -76,7 +66,26 @@
         "location": "Ижевск",
         "degree": "Среднее специальное",
         "field": "Информационные системы и программирование",
-        "graduationYear": 2026
+        "graduationYearStart": 2021,
+        "graduationYearEnd": 2026
+      }
+    ],
+    "projects": [
+      {
+        "name": "StingrayTV Alice",
+        "description": "IoT-шлюз для управления ресивером Триколора через Алису\n\nЦель проекта - интеграция ресиверов Триколора с сервисом \"Дом с Алисой\" от Яндекс.\n\nПлатформа StingrayTV, используемая в ресиверах General Satellite (которые, в свою очередь, и используются Триколором), имеет внешний REST API, который используются в первую очередь мобильными приложениями Триколора (такими как \"Второй экран\").\n\nОднако, я смог приспособить API для куда более интересного использования - а именно для интеграции ресивера со stateless middleware, который и позволяет управлять ресивером через Алису.",
+        "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
+        "programmingLanguage": "Java",
+        "startDate": "2025-11",
+        "endDate": "2026-01"
+      },
+      {
+        "name": "NodehistJ",
+        "description": "Система для работы с историей любительской компьютерной сети FidoNet (а именно - с историей появления/исчезновения узлов сети в нодлистах - сервис обрабатывает нодлисти с 1984 года, и по сей день).\n\nСервис использует Spring Data JDBC для быстрой потоковой обработки данных, PostgreSQL для хранения индексов, и другие современные технологии.\n\nБлагодаря переходу с JPA на JDBC-стек, мне удалось снизить время индексации нодлистов и их диффов с нескольких дней до 30 минут, на слабом сервере с 2x10% vCPU и 4 Гб ОЗУ.",
+        "codeRepository": "https://github.com/oldzoomer-ru/nodehistj",
+        "programmingLanguage": "Java",
+        "startDate": "2025-04",
+        "endDate": "2026-01"
       }
     ],
     "languages": [
@@ -90,7 +99,34 @@
       }
     ],
     "skills": {
-      "technical": ["Java", "Spring Framework", "Docker", "Gradle", "Apache Kafka", "SQL", "Apache Maven", "Mockito", "API", "JUnit", "Flyway", "Hibernate", "Redis", "Keycloak", "OIDC", "Linux"]
+      "technical": [
+        "Java",
+        "Spring Framework",
+        "Docker",
+        "Gradle",
+        "Apache Kafka",
+        "SQL",
+        "Apache Maven",
+        "Mockito",
+        "API",
+        "JUnit",
+        "Flyway",
+        "Hibernate",
+        "Redis",
+        "Keycloak",
+        "OIDC",
+        "Linux",
+        "PostgreSQL",
+        "Git",
+        "Spring Boot",
+        "REST API",
+        "Spring Data",
+        "Spring MVC",
+        "Spring Security",
+        "Atlassian Jira",
+        "Atlassian Confluence",
+        "Swagger"
+      ]
     }
   }
 }
