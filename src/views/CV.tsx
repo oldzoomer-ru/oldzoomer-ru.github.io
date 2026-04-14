@@ -54,7 +54,6 @@ interface CVSkill {
 interface CVProject {
   name: string
   description: string
-  technologies: string[]
   url?: string
   repository?: string
 }
@@ -70,174 +69,15 @@ interface CVFullData {
   projects?: CVProject[]
 }
 
-import { useEffect, useState } from "react"
 import CVBlock from "../components/CVBlock"
-import StructuredData from "../components/StructuredData"
+import fullData from '../data/data.json'
 
 function CV() {
-  const [cvData, setCvData] = useState<CVFullData | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  
-  useEffect(() => {
-    let isMounted = true
-    
-    const loadCVData = async () => {
-      try {
-        const response = await fetch('/data/data.json')
-        if (!response.ok) {
-          throw new Error(`Failed to load CV data: ${response.status}`)
-        }
-        const fullData = await response.json()
-        
-        if (!fullData.cv) {
-          throw new Error("CV data not found in JSON")
-        }
-        
-        // Transform to CVFullData interface
-        const cvData: CVFullData = fullData.cv
-        
-        if (isMounted) {
-          setCvData(cvData)
-          setIsLoading(false)
-          
-          // Update document title and meta tags dynamically
-          document.title = cvData.personal.name + ' — Резюме'
-          
-          // Update meta description
-          const metaDescription = document.querySelector('meta[name="description"]')
-          if (metaDescription) {
-            metaDescription.setAttribute('content', cvData.summary || '')
-          }
-          
-          // Update canonical URL
-          const linkCanonical = document.querySelector('link[rel="canonical"]')
-          if (linkCanonical) {
-            linkCanonical.setAttribute('href', window.location.href)
-          }
-          
-          // Update Open Graph tags
-          const ogTitle = document.querySelector('meta[property="og:title"]')
-          if (ogTitle) {
-            ogTitle.setAttribute('content', cvData.personal.name + ' — Резюме')
-          }
-          
-          const ogDescription = document.querySelector('meta[property="og:description"]')
-          if (ogDescription) {
-            ogDescription.setAttribute('content', cvData.summary || '')
-          }
-          
-          const ogUrl = document.querySelector('meta[property="og:url"]')
-          if (ogUrl) {
-            ogUrl.setAttribute('content', window.location.href)
-          }
-        }
-      } catch (err) {
-        if (isMounted) {
-          const errorMessage = err instanceof Error ? err.message : "Failed to load CV data"
-          setError(errorMessage)
-          setIsLoading(false)
-        }
-      }
-    }
-
-    loadCVData()
-    
-    return () => {
-      isMounted = false
-    }
-  }, [])
-
-  if (isLoading) {
-    return (
-      <div role="status" className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-black">Загрузка резюме...</div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div role="alert" className="p-4 text-red-600 bg-red-900/20 rounded m-4">
-        <h2 className="text-lg font-semibold">Ошибка загрузки резюме</h2>
-        <p>{error}</p>
-      </div>
-    )
-  }
-
-  if (!cvData) {
-    return null
-  }
-
-  // Generate structured data from CV data
-  const cvStructuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "@id": `/data/data.json`,
-        "name": cvData.personal.name,
-        "jobTitle": cvData.desiredPosition.title,
-        "email": cvData.personal.email,
-        "sameAs": [
-          cvData.personal.github && `https://${cvData.personal.github}`,
-          cvData.personal.website,
-          cvData.personal.setka
-        ].filter(Boolean),
-        "description": cvData.summary || ""
-      },
-      ...cvData.experience.map((exp) => ({
-        "@type": "WorkExperience",
-        "jobTitle": exp.position,
-        "organization": {
-          "@type": "Organization",
-          "name": exp.company,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": exp.location
-          }
-        },
-        "startDate": exp.startDate,
-        "endDate": exp.endDate,
-        "description": exp.description.join(". ")
-      })),
-      ...cvData.education.map((edu) => ({
-        "@type": "EducationOccupationalCredential",
-        "name": edu.degree,
-        "educationEstablishment": {
-          "@type": "EducationalOrganization",
-          "name": edu.institution,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": edu.location
-          }
-        },
-        "credentialCategory": edu.field || "Academic",
-        "dateCreated": `/${edu.graduationYearEnd || new Date().getFullYear()}`
-      })),
-      ...(cvData.projects || []).map((project) => ({
-        "@type": "CreativeWork",
-        "name": project.name,
-        "description": project.description,
-        "audience": {
-          "@type": "Audience",
-          "audienceType": ["Developer", "Technologist"]
-        },
-        "inLanguage": "en",
-        "url": project.url,
-        "codeRepository": project.repository
-      })),
-      ...(cvData.languages || []).map((lang) => ({
-        "@type": "LanguageAbility",
-        "name": lang.language,
-        "proficiency": lang.level
-      }))
-    ]
-  }
+  // Transform to CVFullData interface
+  const cvData: CVFullData = fullData.cv
 
   return (
     <>
-      <StructuredData data={cvStructuredData} />
       <main className="w-full max-w-4xl mx-auto p-7">
         {/* Personal Info Header */}
         <section className="mb-8 pb-6 border-b border-gray-700">
@@ -251,7 +91,7 @@ function CV() {
               </p>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-black">
             {cvData.personal.email && (
               <div className="flex items-center gap-2">

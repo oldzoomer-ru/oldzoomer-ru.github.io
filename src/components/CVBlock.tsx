@@ -54,7 +54,6 @@ interface CVSkill {
 interface CVProject {
   name: string
   description: string
-  technologies: string[]
   url?: string
   codeRepository?: string
 }

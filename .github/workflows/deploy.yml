@@ -34,9 +34,9 @@ jobs:
         run: |
           # Install ajv-cli locally and validate JSON schema
           npm install ajv-cli
-          npx ajv validate -s public/data/schema/data.schema.json -d public/data/data.json
+          npx ajv validate -s src/data/schema/data.schema.json -d src/data/data.json
           # Also validate JSON syntax
-          node -e "JSON.parse(require('fs').readFileSync('public/data/data.json', 'utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('src/data/data.json', 'utf8'))"
 
       - name: Build
         run: npm run build
