@@ -1,8 +1,8 @@
 {
   "$schema": "./schema/data.schema.json",
   "metadata": {
-    "title": "Егор Гаврилов — Java Backend Developer",
-    "description": "Java Backend-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
+    "title": "Егор Гаврилов - Java Developer",
+    "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
     "author": "Егор Гаврилов",
     "url": "https://oldzoomer.ru",
     "language": "ru",
@@ -10,12 +10,13 @@
   },
   "person": {
     "name": "Егор Гаврилов",
-    "jobTitle": "Java Backend Developer",
+    "jobTitle": "Java Developer",
     "email": "work@oldzoomer.ru",
-    "description": "Java Backend-разработчик, сертифицированный Vaadin и Cloud.ru специалист.",
+    "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
     "sameAs": [
       "https://t.me/oldzoomer_ru",
-      "https://github.com/oldzoomer-ru"
+      "https://github.com/oldzoomer-ru",
+      "https://set.ki/Dzarbxm"
     ],
     "knowsAbout": [
       "Java 21",
@@ -41,7 +42,7 @@
       "citizenship": "RU"
     },
     "desiredPosition": {
-      "title": "Java-разработчик (Spring)",
+      "title": "Java-разработчик",
       "specializations": ["Программист, разработчик"],
       "employmentType": ["полная занятость", "стажировка"],
       "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
