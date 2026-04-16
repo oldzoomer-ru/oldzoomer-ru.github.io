@@ -72,6 +72,25 @@ interface CVFullData {
 import CVBlock from "../components/CVBlock"
 import fullData from '../data/data.json'
 
+export const meta = () => {
+  const { title, description, url } = fullData.metadata;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: url },
+    { property: 'og:site_name', content: 'oldzoomer' },
+    { property: 'og:locale', content: 'ru_RU' },
+    { property: 'og:image', content: `${url}/preview.png` },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+  ];
+};
+
 function CV() {
   // Transform to CVFullData interface
   const cvData: CVFullData = fullData.cv
