@@ -29,7 +29,7 @@ function CV() {
     <>
       <main className="w-full max-w-4xl mx-auto p-7">
         {/* Personal Info Header */}
-        <section className="mb-8 pb-6 border-b border-gray-700">
+        <section className="mb-4 pb-1">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl font-bold text-black mb-2">
@@ -59,7 +59,7 @@ function CV() {
             {cvData.personal.github && (
               <div className="flex items-center gap-2">
                 <span className="font-medium">GitHub:</span>
-                <a href={cvData.personal.github.startsWith('http') ? cvData.personal.github : `https://${cvData.personal.github}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                <a href={cvData.personal.github} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   {cvData.personal.github}
                 </a>
               </div>
@@ -96,8 +96,8 @@ function CV() {
         </section>
 
         {/* Desired Position */}
-        <section className="mb-8 pb-6 border-b border-gray-700">
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+        <section className="mb-3 pb-1">
+          <h2 className="text-xl font-bold mb-2 text-black">
             Желаемая должность
           </h2>
           <div className="space-y-3 text-black">
@@ -120,7 +120,6 @@ function CV() {
                 <p>{cvData.desiredPosition.workFormat.join(', ')}</p>
               </div>
             )}
-
           </div>
         </section>
 

@@ -42,7 +42,7 @@ function CVBlock({ data }: { data: CVFullData }) {
       {/* Summary */}
       {data.summary && (
         <section>
-          <h2 className="text-xl font-bold mb-3 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-3 text-black pb-1">
             Обо мне
           </h2>
           <p className="text-black whitespace-pre-line">{data.summary}</p>
@@ -52,13 +52,12 @@ function CVBlock({ data }: { data: CVFullData }) {
       {/* Experience */}
       {data.experience.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black pb-1">
             Опыт работы
           </h2>
           <div className="space-y-6">
             {data.experience.map((exp, index) => (
-              <div key={index} className="relative pl-4 border-l-2 border-gray-700">
-                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-500"></div>
+              <div key={index} className="relative">
                 <div className="mb-1">
                   <h3 className="text-lg font-semibold text-black">
                     {exp.position}
@@ -91,12 +90,12 @@ function CVBlock({ data }: { data: CVFullData }) {
       {/* Education */}
       {data.education.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black pb-1">
             Образование
           </h2>
           <div className="space-y-4">
             {data.education.map((edu, index) => (
-              <div key={index} className="pl-4 border-l-2 border-gray-700">
+              <div key={index}>
                 <h3 className="text-lg font-semibold text-black">
                   {edu.institution}
                 </h3>
@@ -118,7 +117,7 @@ function CVBlock({ data }: { data: CVFullData }) {
       {/* Languages */}
       {data.languages && data.languages.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black pb-1">
             Языки
           </h2>
           <div className="space-y-2">
@@ -136,7 +135,7 @@ function CVBlock({ data }: { data: CVFullData }) {
       {Array.isArray(data.skills) ? (
         data.skills.length > 0 && (
           <section>
-            <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+            <h2 className="text-xl font-bold mb-4 text-black pb-1">
               Навыки
             </h2>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -162,7 +161,7 @@ function CVBlock({ data }: { data: CVFullData }) {
         )
       ) : ('technical' in data.skills && data.skills.technical.length > 0) && (
         <section>
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black pb-1">
             Навыки
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -181,7 +180,7 @@ function CVBlock({ data }: { data: CVFullData }) {
       {/* Projects */}
       {data.projects && data.projects.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-500 pb-1">
+          <h2 className="text-xl font-bold mb-4 text-black pb-1">
             Проекты
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
