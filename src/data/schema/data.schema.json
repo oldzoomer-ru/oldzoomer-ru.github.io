@@ -12,7 +12,7 @@
           "type": "object",
           "properties": {
             "domain": { "type": "string" },
-            "baseUrl": { "type": "string", "format": "uri" },
+            "baseUrl": { "type": "string" },
             "title": { "type": "string" },
             "ogSiteName": { "type": "string" },
             "locale": { "type": "string" },
@@ -26,7 +26,7 @@
           "type": "object",
           "properties": {
             "githubRepo": { "type": "string" },
-            "githubBaseUrl": { "type": "string", "format": "uri" }
+            "githubBaseUrl": { "type": "string" }
           },
           "required": ["githubRepo", "githubBaseUrl"]
         }
