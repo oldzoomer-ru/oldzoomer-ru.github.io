@@ -12,14 +12,11 @@ export function Layout({
 }: {
   children: React.ReactNode;
 }) {
+  const { baseUrl, title, description, language } = fullData.config.site;
   const { name, jobTitle, email, sameAs, knowsAbout } = fullData.person;
-  const { title, description, url } = fullData.metadata;
-
-  // Extract data from the CV section of the data.json
   const cvData = fullData.cv;
   
-  // Prepare skills data properly
-  let skills = [];
+  let skills: string[] = [];
   if (Array.isArray(cvData.skills)) {
     skills = cvData.skills.flatMap(skill => skill.items);
   } else if (cvData.skills && 'technical' in cvData.skills) {
@@ -32,15 +29,15 @@ export function Layout({
       "@type": "ProfilePage",
       "name": title,
       "description": description,
-      "url": url,
-      "inLanguage": "ru-RU",
+      "url": baseUrl,
+      "inLanguage": language,
       "mainEntity": {
         "@type": "Person",
         "name": name,
         "jobTitle": jobTitle,
         "email": email,
         "description": description,
-        "url": url,
+        "url": baseUrl,
         "sameAs": sameAs,
         "knowsAbout": knowsAbout,
         "address": {
@@ -60,7 +57,7 @@ export function Layout({
         "name": name,
         "jobTitle": jobTitle,
         "email": email,
-        "url": url,
+        "url": baseUrl,
         "sameAs": sameAs
       }
     }

@@ -1,79 +1,9 @@
-interface CVPersonalInfo {
-  name: string
-  gender?: string
-  phone?: string
-  email?: string
-  telegram?: string
-  setka?: string
-  github?: string
-  website?: string
-  location?: string
-  citizenship?: string
-  workPermit?: string
-  relocation?: string
-  businessTrips?: string
-  lastUpdated?: string
-}
-
-interface CVDesiredPosition {
-  title: string
-  specializations?: string[]
-  employmentType?: string[]
-  workFormat?: string[]
-  commuteTime?: string
-}
-
-interface CVExperience {
-  position: string
-  company: string
-  startDate: string
-  endDate?: string
-  description: string[]
-  location?: string
-}
-
-interface CVEducation {
-  institution: string
-  degree: string
-  field?: string
-  graduationYearStart?: number
-  graduationYearEnd?: number
-  location?: string
-}
-
-interface CVLanguage {
-  language: string
-  level: string
-}
-
-interface CVSkill {
-  category: string
-  items: string[]
-}
-
-interface CVProject {
-  name: string
-  description: string
-  url?: string
-  repository?: string
-}
-
-interface CVFullData {
-  personal: CVPersonalInfo
-  desiredPosition: CVDesiredPosition
-  summary?: string
-  experience: CVExperience[]
-  education: CVEducation[]
-  languages?: CVLanguage[]
-  skills: CVSkill[] | { technical: string[] }
-  projects?: CVProject[]
-}
-
 import CVBlock from "../components/CVBlock"
 import fullData from '../data/data.json'
+import type { CVFullData } from "../types/CVTypes";
 
 export const meta = () => {
-  const { title, description, url } = fullData.metadata;
+  const { title, description, baseUrl, ogSiteName, locale } = fullData.config.site;
 
   return [
     { title },
@@ -81,10 +11,10 @@ export const meta = () => {
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: url },
-    { property: 'og:site_name', content: 'oldzoomer' },
-    { property: 'og:locale', content: 'ru_RU' },
-    { property: 'og:image', content: `${url}/preview.png` },
+    { property: 'og:url', content: baseUrl },
+    { property: 'og:site_name', content: ogSiteName },
+    { property: 'og:locale', content: locale },
+    { property: 'og:image', content: `${baseUrl}/preview.png` },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
