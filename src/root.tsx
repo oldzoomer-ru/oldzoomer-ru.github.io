@@ -15,37 +15,54 @@ export function Layout({
   const { name, jobTitle, email, sameAs, knowsAbout } = fullData.person;
   const { title, description, url } = fullData.metadata;
 
+  // Extract data from the CV section of the data.json
+  const cvData = fullData.cv;
+  
+  // Prepare skills data properly
+  let skills = [];
+  if (Array.isArray(cvData.skills)) {
+    skills = cvData.skills.flatMap(skill => skill.items);
+  } else if (cvData.skills && 'technical' in cvData.skills) {
+    skills = cvData.skills.technical;
+  }
+  
   const schemas = [
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": name,
-      "jobTitle": jobTitle,
-      "email": email,
-      "description": description,
-      "url": url,
-      "sameAs": sameAs,
-      "knowsAbout": knowsAbout
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
+      "@type": "ProfilePage",
       "name": title,
       "description": description,
       "url": url,
-      "inLanguage": "ru-RU"
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Главная",
-          "item": url
-        }
-      ]
+      "inLanguage": "ru-RU",
+      "mainEntity": {
+        "@type": "Person",
+        "name": name,
+        "jobTitle": jobTitle,
+        "email": email,
+        "description": description,
+        "url": url,
+        "sameAs": sameAs,
+        "knowsAbout": knowsAbout,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": cvData.personal.location || ""
+        },
+        "hasOccupation": [
+          {
+            "@type": "Occupation",
+            "name": jobTitle,
+            "skills": skills
+          }
+        ]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": name,
+        "jobTitle": jobTitle,
+        "email": email,
+        "url": url,
+        "sameAs": sameAs
+      }
     }
   ];
 
