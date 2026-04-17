@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const DOMAIN = 'https://oldzoomer.ru';
+// Читаем конфигурацию из data.json
+const dataPath = path.join(process.cwd(), 'src/data/data.json');
+const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+const baseUrl = data.config.site.baseUrl;
 const OUT_DIR = path.join(process.cwd(), 'build/client');
 
 // Опишите ваши роуты здесь
@@ -14,7 +18,7 @@ function generateSitemap(urls: string[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://sitemaps.org">
 ${urls.map(url => `  <url>
-    <loc>${DOMAIN}${url === '/' ? '' : url}</loc>
+    <loc>${baseUrl}${url === '/' ? '' : url}</loc>
     <lastmod>${lastmod}</lastmod>
     <priority>${url === '/' ? '1.0' : '0.8'}</priority>
   </url>`).join('\n')}
@@ -26,7 +30,7 @@ function generateRobots() {
   return `User-agent: *
 Allow: /
 
-Sitemap: ${DOMAIN}/sitemap.xml`;
+Sitemap: ${baseUrl}/sitemap.xml`;
 }
 
 // Выполнение

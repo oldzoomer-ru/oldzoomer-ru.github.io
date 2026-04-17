@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://oldzoomer-ru.github.io",
   "scripts": {
     "dev": "react-router dev",
     "devcontainers": "react-router dev --host",

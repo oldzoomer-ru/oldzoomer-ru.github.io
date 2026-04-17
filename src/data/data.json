@@ -1,12 +1,20 @@
 {
   "$schema": "./schema/data.schema.json",
-  "metadata": {
-    "title": "Егор Гаврилов - Java Developer",
-    "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
-    "author": "Егор Гаврилов",
-    "url": "https://oldzoomer.ru",
-    "language": "ru",
-    "updatedAt": "2026-03-31T05:30:00Z"
+  "config": {
+    "site": {
+      "domain": "oldzoomer.ru",
+      "baseUrl": "https://oldzoomer.ru",
+      "title": "Егор Гаврилов - Java Developer",
+      "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
+      "author": "Егор Гаврилов",
+      "language": "ru",
+      "ogSiteName": "oldzoomer",
+      "locale": "ru_RU"
+    },
+    "deployment": {
+      "githubRepo": "oldzoomer-ru/oldzoomer-ru",
+      "githubBaseUrl": "https://oldzoomer-ru.github.io"
+    }
   },
   "person": {
     "name": "Егор Гаврилов",
@@ -26,9 +34,6 @@
       "Docker",
       "FidoNet"
     ]
-  },
-  "content": {
-    "mainPageFileUrl": "https://raw.githubusercontent.com/oldzoomer-ru/oldzoomer-ru/refs/heads/master/README.md"
   },
   "cv": {
     "personal": {
