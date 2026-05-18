@@ -129,7 +129,15 @@
               "name": { "type": "string" },
               "description": { "type": "string" },
               "codeRepository": { "type": "string" },
-              "programmingLanguage": { "type": "string" }
+              "programmingLanguage": {
+                "type": "string"
+              },
+              "startDate": {
+                "type": "string"
+              },
+              "endDate": {
+                "type": "string"
+              }
             },
             "required": ["name", "description", "codeRepository", "programmingLanguage"]
           }

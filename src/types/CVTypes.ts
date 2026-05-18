@@ -56,6 +56,9 @@ interface CVProject {
   description: string
   url?: string
   codeRepository?: string
+  startDate?: string
+  endDate?: string
+  programmingLanguage?: string
 }
 
 interface CVFullData {
