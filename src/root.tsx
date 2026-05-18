@@ -13,7 +13,7 @@ export function Layout({
   children: React.ReactNode;
 }) {
   const { baseUrl, title, description, language } = fullData.config.site;
-  const { name, jobTitle, email, sameAs, knowsAbout } = fullData.person;
+  const { name, jobTitle, email, sameAs } = fullData.person;
   const cvData = fullData.cv;
   
   let skills: string[] = [];
@@ -39,7 +39,7 @@ export function Layout({
         "description": description,
         "url": baseUrl,
         "sameAs": sameAs,
-        "knowsAbout": knowsAbout,
+        "knowsAbout": skills,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": cvData.personal.location || ""

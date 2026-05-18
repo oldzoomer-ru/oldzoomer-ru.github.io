@@ -43,13 +43,15 @@
         "sameAs": {
           "type": "array",
           "items": { "type": "string" }
-        },
-        "knowsAbout": {
-          "type": "array",
-          "items": { "type": "string" }
         }
       },
-      "required": ["name", "jobTitle", "email", "description", "sameAs", "knowsAbout"]
+      "required": [
+        "name",
+        "jobTitle",
+        "email",
+        "description",
+        "sameAs"
+      ]
     },
     "cv": {
       "type": "object",
