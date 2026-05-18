@@ -39,16 +39,6 @@ function CVBlock({ data }: { data: CVFullData }) {
   
   return (
     <div className="space-y-8">
-      {/* Summary */}
-      {data.summary && (
-        <section>
-          <h2 className="text-xl font-bold mb-3 text-black pb-1">
-            Обо мне
-          </h2>
-          <p className="text-black whitespace-pre-line">{data.summary}</p>
-        </section>
-      )}
-
       {/* Experience */}
       {data.experience.length > 0 && (
         <section>
@@ -189,10 +179,24 @@ function CVBlock({ data }: { data: CVFullData }) {
                 key={index}
                 className="p-4 bg-gray-800 rounded-lg border border-gray-700 hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {project.name}
-                </h3>
-                <p className="text-white mb-3">
+                <div className="flex items-start justify-between gap-2 mb-1">
+                  <h3 className="text-lg font-semibold text-white">
+                    {project.name}
+                  </h3>
+                  {project.programmingLanguage && (
+                    <span className="text-xs px-2 py-0.5 bg-gray-600 text-gray-200 rounded shrink-0">
+                      {project.programmingLanguage}
+                    </span>
+                  )}
+                </div>
+                {(project.startDate || project.endDate) && (
+                  <p className="text-sm text-gray-400 mb-2">
+                    {project.startDate ? formatDate(project.startDate) : ''}
+                    {project.startDate && project.endDate ? ' — ' : ''}
+                    {project.endDate ? formatDate(project.endDate) : ''}
+                  </p>
+                )}
+                <p className="text-white mb-3 whitespace-pre-line text-sm leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex gap-3">
@@ -201,7 +205,7 @@ function CVBlock({ data }: { data: CVFullData }) {
                       href={project.codeRepository}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-white underline"
+                      className="text-sm text-white underline hover:text-gray-300 transition-colors"
                     >
                       Репозиторий
                     </a>

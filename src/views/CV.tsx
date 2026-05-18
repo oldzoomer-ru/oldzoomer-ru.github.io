@@ -123,6 +123,16 @@ function CV() {
           </div>
         </section>
 
+        {/* Summary */}
+        {cvData.summary && (
+          <section className="mb-6 pb-1">
+            <h2 className="text-xl font-bold mb-3 text-black pb-1">
+              Обо мне
+            </h2>
+            <div className="text-black whitespace-pre-line">{cvData.summary}</div>
+          </section>
+        )}
+
         {/* CV Blocks */}
         <CVBlock data={cvData} />
       </main>
