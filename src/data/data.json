@@ -5,7 +5,7 @@
       "domain": "oldzoomer.ru",
       "baseUrl": "https://oldzoomer.ru",
       "title": "Егор Гаврилов - Java Developer",
-      "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
+      "description": "Java-разработчик. Работаю с Java 21/25, Spring Boot 4.x.",
       "author": "Егор Гаврилов",
       "language": "ru",
       "ogSiteName": "oldzoomer",
@@ -20,25 +20,27 @@
     "name": "Егор Гаврилов",
     "jobTitle": "Java Developer",
     "email": "work@oldzoomer.ru",
-    "description": "Java-разработчик. Работаю с Java 17/21/25, Spring Boot 3.x/4.x.",
+    "description": "Java-разработчик. Работаю с Java 21/25, Spring Boot 4.x.",
     "sameAs": [
       "https://t.me/oldzoomer_ru",
       "https://github.com/oldzoomer-ru",
       "https://set.ki/Dzarbxm"
     ],
     "knowsAbout": [
-      "Java 21",
+      "Java",
       "Spring Boot",
       "Kafka",
       "PostgreSQL",
       "Docker",
+      "Redis",
+      "Keycloak",
       "FidoNet"
     ]
   },
   "cv": {
     "personal": {
       "name": "Гаврилов Егор Денисович",
-      "email": "work@oldzoomer.ru",
+      "email": "gavrilovegor519-2@yandex.ru",
       "telegram": "@oldzoomer_ru",
       "setka": "https://set.ki/Dzarbxm",
       "github": "https://github.com/oldzoomer-ru",
@@ -52,7 +54,7 @@
       "employmentType": ["полная занятость", "частичная занятость", "проектная работа/разовое задание", "стажировка"],
       "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
     },
-    "summary": "- Backend-разработчик, специализируюсь на стеке Java / Spring.\n- Навыки DevOps: развертывание и поддержка приложений, автоматизация инфраструктуры.\n- Опыт оптимизации: ускорение индексации данных с 3 дней до 30 мин через Spring Data JDBC + стриминг.\n- Работа с ИИ: локальные LLM, ИИ-агенты (Continue, Roo Code, VeAl).\n\nРассматриваю удалёнку по всей РФ (в т. ч. в других часовых поясах), гибрид в Нижнем Новгороде, гибрид/офис в Кстово.",
+    "summary": "Java-разработчик, специализируюсь на Spring Boot, микросервисах и интеграциях.\n\nОпыт коммерческой разработки: миграция региональной системы бюджетного планирования с Microsoft Access на Vaadin + Spring Boot.\n\nPet-проекты:\n- NodehistJ: система индексации исторических данных FidoNet — оптимизация сократила время с 3 суток до 30 минут.\n- StingrayTV Alice: интеграция спутниковых ресиверов \"Триколор\" с \"Домом с Алисой\" (OAuth2, mDNS, SSE).\n\nРассматриваю удалёнку по всей РФ (в т.ч. другие часовые пояса), гибрид в Нижнем Новгороде, офис/гибрид в Кстово.",
     "experience": [
       {
         "position": "Java-разработчик",
@@ -61,8 +63,10 @@
         "startDate": "2024-04-01",
         "endDate": "2024-08-31",
         "description": [
-          "Перевел систему планирования бюджета региона с Microsoft Access на современный стек (Spring, Vaadin), что сняло зависимость от Windows и упростило дальнейшую поддержку.",
-          "Разработка UI-компонентов на Vaadin для точного воспроизведения интерфейса старой системы, обеспечив бесшовный и привычный пользовательский опыт для сотрудников."
+          "Миграция региональной системы бюджетного планирования с Microsoft Access на Vaadin + Spring Boot 2.7 (Java 17, MS SQL Server).",
+          "Разработка веб-интерфейса на Vaadin 23 с сохранением привычного UX старой системы для конечных пользователей.",
+          "Перенос и адаптация бизнес-логики из Microsoft Access в Java-приложение, обеспечение совместимости с существующими системами бюджетного планирования.",
+          "Успешное внедрение в государственных органах — полное импортозамещение проприетарных решений Microsoft, снижение затрат на обучение персонала, повышение надёжности и безопасности системы."
         ]
       }
     ],
@@ -79,7 +83,7 @@
     "projects": [
       {
         "name": "StingrayTV Alice",
-        "description": "IoT-шлюз для управления ресивером Триколора через Алису.\n\nИнтеграция ресиверов Триколора с сервисом \"Дом с Алисой\" от Яндекс через REST API StingrayTV.\n\nИспользовано: mDNS для discovery в локальной сети, Keycloak + Spring Security для OAuth2-связки с Яндексом, WebClient для SSE-потоков.",
+        "description": "IoT-шлюз для управления ресивером Триколора через Алису.\n\nИнтеграция ресиверов Триколора с сервисом \"Дом с Алисой\" от Яндекса через REST API StingrayTV.\n\nЧто сделано:\n- реализована интеграция с \"Домом с Алисой\": эндпоинты для получения списка устройств, запросов состояний, выполнения команд и unlink;\n- настроена OAuth2-авторизация через Keycloak и Spring Security;\n- добавлено автообнаружение ресивера в сети через JmDNS (mDNS/Bonjour);\n- реализована работа с WebClient для SSE-потоков и асинхронных запросов к ресиверу;\n- подготовлено Docker-окружение и docker-compose для развёртывания.\n\nРезультат: пользователи могут голосом переключать каналы, узнавать про передачи и управлять питанием ресивера; подключение устройства занимает до 30 секунд.\n\nТехнологии: Java 25, Spring Boot 4.x, Spring Security, Keycloak, JmDNS, WebClient/SSE, Docker, OAuth2.",
         "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
         "programmingLanguage": "Java",
         "startDate": "2025-11",
@@ -87,7 +91,7 @@
       },
       {
         "name": "NodehistJ",
-        "description": "Система обработки истории узлов сети FidoNet (нодлисты с 1984 года по н.в.).\n\nСтек: Spring Data JDBC (прямой стриминг), PostgreSQL, Kafka.\n\nРезультат: сокращение времени индексации с 3 дней до 30 минут на сервере с 2x10% vCPU и 4 Гб ОЗУ за счёт отказа от JPA в пользу JDBC.",
+        "description": "Система обработки истории узлов сети FidoNet (нодлисты с 1984 года по н.в.) — микросервис для хранения, индексации и доступа к архивам.\n\nЧто сделано:\n- спроектированы микросервисы на Spring Boot: сервис исторических данных, сервис актуальных нодлистов, сервис расчёта диффов;\n- подключена Apache Kafka (Redpanda) для обмена данными между сервисами;\n- выполнена оптимизация: переход с JPA на Spring Data JDBC со стримингом, чтобы не загружать большие данные в память;\n- настроено кэширование в Redis для ускорения запросов;\n- интегрировано S3-совместимое хранилище для архивов;\n- использованы виртуальные потоки (Java 21/25) — снижение потребления памяти и повышение пропускной способности.\n\nРезультат: индексация исторических данных занимает 30 минут вместо 3 суток (на сервере с 2×10% vCPU и 4 ГБ RAM).\n\nТехнологии: Java 25, Spring Boot 4.x, Spring Data JDBC, Kafka/Redpanda, PostgreSQL, Redis, S3, Docker, Gradle, Virtual Threads.",
         "codeRepository": "https://github.com/oldzoomer-ru/nodehistj",
         "programmingLanguage": "Java",
         "startDate": "2025-04",
@@ -109,33 +113,41 @@
         "Java",
         "Spring Framework",
         "Spring Boot",
-        "Spring MVC",
         "Spring Security",
         "Spring Data",
         "Spring Data JDBC",
+        "Spring Web",
         "Vaadin",
-        "Hibernate",
         "JPA",
+        "Apache Kafka",
+        "Redpanda",
         "Docker",
+        "Docker Compose",
         "Gradle",
         "Apache Maven",
-        "Apache Kafka",
         "SQL",
         "PostgreSQL",
         "Redis",
+        "S3",
         "Flyway",
         "Keycloak",
-        "OIDC",
+        "OAuth2",
+        "JWT",
         "REST API",
+        "Swagger",
         "JUnit",
         "Mockito",
+        "WebClient",
+        "SSE",
+        "JmDNS",
         "Git",
+        "GitHub Actions",
         "Linux",
+        "systemd",
+        "Virtual Threads",
         "Atlassian Jira",
-        "Atlassian Confluence",
-        "Swagger",
-        "Local LLM",
-        "ИИ-агенты"
+        "FidoNet",
+        "FTN-протоколы"
       ]
     }
   }
