@@ -70,24 +70,7 @@
         "graduationYearEnd": 2026
       }
     ],
-    "projects": [
-      {
-        "name": "StingrayTV Alice",
-        "description": "IoT-шлюз для управления ресивером Триколора через Алису.\n\nИнтеграция ресиверов Триколора с сервисом \"Дом с Алисой\" от Яндекса через REST API StingrayTV.\n\nЧто сделано:\n- реализована интеграция с \"Домом с Алисой\": эндпоинты для получения списка устройств, запросов состояний, выполнения команд и unlink;\n- настроена OAuth2-авторизация через Keycloak и Spring Security;\n- добавлено автообнаружение ресивера в сети через JmDNS (mDNS/Bonjour);\n- реализована работа с WebClient для SSE-потоков и асинхронных запросов к ресиверу;\n- подготовлено Docker-окружение и docker-compose для развёртывания.\n\nРезультат: пользователи могут голосом переключать каналы, узнавать про передачи и управлять питанием ресивера; подключение устройства занимает до 30 секунд.\n\nТехнологии: Java 25, Spring Boot 4.x, Spring Security, Keycloak, JmDNS, WebClient/SSE, Docker, OAuth2.",
-        "codeRepository": "https://github.com/oldzoomer-ru/stingraytv-alice",
-        "programmingLanguage": "Java",
-        "startDate": "2025-11",
-        "endDate": "2026-01"
-      },
-      {
-        "name": "NodehistJ",
-        "description": "Система обработки истории узлов сети FidoNet (нодлисты с 1984 года по н.в.) — микросервис для хранения, индексации и доступа к архивам.\n\nЧто сделано:\n- спроектированы микросервисы на Spring Boot: сервис исторических данных, сервис актуальных нодлистов, сервис расчёта диффов;\n- подключена Apache Kafka (Redpanda) для обмена данными между сервисами;\n- выполнена оптимизация: переход с JPA на Spring Data JDBC со стримингом, чтобы не загружать большие данные в память;\n- настроено кэширование в Redis для ускорения запросов;\n- интегрировано S3-совместимое хранилище для архивов;\n- использованы виртуальные потоки (Java 21/25) — снижение потребления памяти и повышение пропускной способности.\n\nРезультат: индексация исторических данных занимает 30 минут вместо 3 суток (на сервере с 2×10% vCPU и 4 ГБ RAM).\n\nТехнологии: Java 25, Spring Boot 4.x, Spring Data JDBC, Kafka/Redpanda, PostgreSQL, Redis, S3, Docker, Gradle, Virtual Threads.",
-        "codeRepository": "https://github.com/oldzoomer-ru/nodehistj",
-        "programmingLanguage": "Java",
-        "startDate": "2025-04",
-        "endDate": "2026-01"
-      }
-    ],
+    "projects": [],
     "languages": [
       {
         "language": "ru",
@@ -109,31 +92,19 @@
         "Spring Web",
         "Vaadin",
         "JPA",
-        "Apache Kafka",
-        "Redpanda",
         "Docker",
         "Docker Compose",
         "Gradle",
         "Apache Maven",
         "SQL",
-        "PostgreSQL",
-        "Redis",
-        "S3",
-        "Flyway",
         "Keycloak",
         "OAuth2",
-        "JWT",
         "REST API",
-        "Swagger",
         "JUnit",
         "Mockito",
-        "WebClient",
-        "SSE",
-        "JmDNS",
         "Git",
         "GitHub Actions",
-        "Linux",
-        "FidoNet"
+        "Linux"
       ]
     }
   }
