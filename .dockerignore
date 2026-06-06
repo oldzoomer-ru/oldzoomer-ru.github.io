@@ -1,0 +1,16 @@
+node_modules
+build
+.react-router
+.git
+.gitignore
+.vscode
+.idea
+*.log
+coverage
+.env
+.env.local
+*.swp
+*.swo
+.DS_Store
+docker-compose.yml
+Dockerfile
