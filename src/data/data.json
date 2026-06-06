@@ -5,7 +5,7 @@
       "domain": "oldzoomer.ru",
       "baseUrl": "https://oldzoomer.ru",
       "title": "Егор Гаврилов - Java Developer",
-      "description": "Java-разработчик. Работаю с Java 21/25, Spring Boot 4.x.",
+      "description": "Java-разработчик. Java 17/21/25, Spring Boot 2.7/3.x/4.x, Docker, Linux.",
       "author": "Егор Гаврилов",
       "language": "ru",
       "ogSiteName": "oldzoomer",
@@ -44,7 +44,7 @@
       "employmentType": ["полная занятость", "частичная занятость", "проектная работа/разовое задание", "стажировка"],
       "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
     },
-    "summary": "Java-разработчик, специализируюсь на Spring Boot, микросервисах и интеграциях.\nРассматриваю удалёнку по всей РФ (в т.ч. другие часовые пояса), гибрид в Нижнем Новгороде, офис/гибрид в Кстово.",
+    "summary": "Java-разработчик, специализируюсь на Spring Boot, микросервисах и интеграциях.\nФормат: удалённо по РФ (готов к разным часовым поясам), гибрид в Нижнем Новгороде или офис/гибрид в Кстово.",
     "experience": [
       {
         "position": "Java-разработчик",
@@ -86,25 +86,25 @@
         "Java",
         "Spring Framework",
         "Spring Boot",
-        "Spring Security",
-        "Spring Data",
-        "Spring Data JDBC",
         "Spring Web",
-        "Vaadin",
-        "JPA",
-        "Docker",
-        "Docker Compose",
+        "Spring Security",
+        "Spring Data JPA",
+        "Spring Data JDBC",
+        "Spring Cache",
         "Gradle",
         "Apache Maven",
+        "Linux",
+        "Docker",
+        "Testcontainers",
+        "Kafka",
+        "Redis",
         "SQL",
-        "Keycloak",
-        "OAuth2",
         "REST API",
         "JUnit",
         "Mockito",
         "Git",
         "GitHub Actions",
-        "Linux"
+        "GitHub Pages"
       ]
     }
   }
