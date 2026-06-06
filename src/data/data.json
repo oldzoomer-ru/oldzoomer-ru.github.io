@@ -27,7 +27,7 @@
       "https://set.ki/Dzarbxm"
     ]
   },
-  "cv": {
+  "data": {
     "personal": {
       "name": "Гаврилов Егор Денисович",
       "email": "work@oldzoomer.ru",
@@ -37,12 +37,6 @@
       "website": "https://oldzoomer.ru",
       "location": "Кстово",
       "citizenship": "RU"
-    },
-    "desiredPosition": {
-      "title": "Java Developer",
-      "specializations": ["Программист, разработчик"],
-      "employmentType": ["полная занятость", "частичная занятость", "проектная работа/разовое задание", "стажировка"],
-      "workFormat": ["на месте работодателя", "удалённо", "гибрид"]
     },
     "summary": "Java-разработчик, специализируюсь на Spring Boot, микросервисах и интеграциях.\nФормат: удалённо по РФ (готов к разным часовым поясам), гибрид в Нижнем Новгороде или офис/гибрид в Кстово.",
     "experience": [

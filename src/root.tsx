@@ -14,7 +14,7 @@ export function Layout({
 }) {
   const { baseUrl, title, description, language } = fullData.config.site;
   const { name, jobTitle, email, sameAs } = fullData.person;
-  const cvData = fullData.cv;
+  const cvData = fullData.data;
   
   let skills: string[] = [];
   if (Array.isArray(cvData.skills)) {
