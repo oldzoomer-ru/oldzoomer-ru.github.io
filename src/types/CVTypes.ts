@@ -15,14 +15,6 @@ interface CVPersonalInfo {
   lastUpdated?: string
 }
 
-interface CVDesiredPosition {
-  title: string
-  specializations?: string[]
-  employmentType?: string[]
-  workFormat?: string[]
-  commuteTime?: string
-}
-
 interface CVExperience {
   position: string
   company: string
@@ -63,7 +55,6 @@ interface CVProject {
 
 interface CVFullData {
   personal: CVPersonalInfo
-  desiredPosition: CVDesiredPosition
   summary?: string
   experience: CVExperience[]
   education: CVEducation[]
@@ -78,7 +69,6 @@ export type {
   CVSkill,
   CVProject,
   CVPersonalInfo,
-  CVDesiredPosition,
   CVFullData,
   CVLanguage
 }

@@ -53,7 +53,7 @@
         "sameAs"
       ]
     },
-    "cv": {
+    "data": {
       "type": "object",
       "properties": {
         "personal": {
@@ -69,25 +69,6 @@
             "citizenship": { "type": "string" }
           },
           "required": ["name"]
-        },
-        "desiredPosition": {
-          "type": "object",
-          "properties": {
-            "title": { "type": "string" },
-            "specializations": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "employmentType": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "workFormat": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
-          },
-          "required": ["title"]
         },
         "summary": { "type": "string" },
         "experience": {
@@ -166,8 +147,15 @@
           "required": ["technical"]
         }
       },
-      "required": ["personal", "desiredPosition", "skills"]
+      "required": [
+        "personal",
+        "skills"
+      ]
     }
   },
-  "required": ["config", "person", "cv"]
+  "required": [
+    "config",
+    "person",
+    "data"
+  ]
 }

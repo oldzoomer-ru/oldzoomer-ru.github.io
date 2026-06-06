@@ -23,7 +23,7 @@ export const meta = () => {
 
 function CV() {
   // Transform to CVFullData interface
-  const cvData: CVFullData = fullData.cv
+  const cvData: CVFullData = fullData.data
 
   return (
     <>
@@ -35,9 +35,6 @@ function CV() {
               <h1 className="text-3xl font-bold text-black mb-2">
                 {cvData.personal.name}
               </h1>
-              <p className="text-xl text-black font-semibold">
-                {cvData.desiredPosition.title}
-              </p>
             </div>
           </div>
 
@@ -90,34 +87,6 @@ function CV() {
               <div className="flex items-center gap-2">
                 <span className="font-medium">Гражданство:</span>
                 <span>{cvData.personal.citizenship === 'RU' ? 'Россия' : cvData.personal.citizenship}</span>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Desired Position */}
-        <section className="mb-3 pb-1">
-          <h2 className="text-xl font-bold mb-2 text-black">
-            Желаемая должность
-          </h2>
-          <div className="space-y-3 text-black">
-            <p className="text-lg font-semibold">{cvData.desiredPosition.title}</p>
-            {cvData.desiredPosition.specializations && cvData.desiredPosition.specializations.length > 0 && (
-              <div>
-                <span className="font-medium">Специализации:</span>
-                <p>{cvData.desiredPosition.specializations.join(', ')}</p>
-              </div>
-            )}
-            {cvData.desiredPosition.employmentType && cvData.desiredPosition.employmentType.length > 0 && (
-              <div>
-                <span className="font-medium">Тип занятости:</span>
-                <p>{cvData.desiredPosition.employmentType.join(', ')}</p>
-              </div>
-            )}
-            {cvData.desiredPosition.workFormat && cvData.desiredPosition.workFormat.length > 0 && (
-              <div>
-                <span className="font-medium">Формат работы:</span>
-                <p>{cvData.desiredPosition.workFormat.join(', ')}</p>
               </div>
             )}
           </div>
