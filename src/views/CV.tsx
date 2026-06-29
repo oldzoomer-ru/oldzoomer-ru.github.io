@@ -1,112 +1,146 @@
-import CVBlock from "../components/CVBlock"
-import fullData from '../data/data.json'
+import CVBlock from "../components/CVBlock";
+import fullData from "../data/data.json";
 import type { CVFullData } from "../types/CVTypes";
 
 export const meta = () => {
-  const { title, description, baseUrl, ogSiteName, locale } = fullData.config.site;
+    const { title, description, baseUrl, ogSiteName, locale } =
+        fullData.config.site;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: baseUrl },
-    { property: 'og:site_name', content: ogSiteName },
-    { property: 'og:locale', content: locale },
-    { property: 'og:image', content: `${baseUrl}/preview.png` },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-  ];
+    return [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: baseUrl },
+        { property: "og:site_name", content: ogSiteName },
+        { property: "og:locale", content: locale },
+        { property: "og:image", content: `${baseUrl}/preview.png` },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+    ];
 };
 
 function CV() {
-  // Transform to CVFullData interface
-  const cvData: CVFullData = fullData.data
+    // Transform to CVFullData interface
+    const cvData: CVFullData = fullData.data;
 
-  return (
-    <>
-      <main className="w-full max-w-4xl mx-auto p-7">
-        {/* Personal Info Header */}
-        <section className="mb-4 pb-1">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-black mb-2">
-                {cvData.personal.name}
-              </h1>
-            </div>
-          </div>
+    return (
+        <main className="w-full max-w-4xl mx-auto p-7">
+            {/* Personal Info Header */}
+            <section className="mb-4 pb-1">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                    <div>
+                        <h1 className="text-3xl font-bold text-black mb-2">
+                            {cvData.personal.name}
+                        </h1>
+                    </div>
+                </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-black">
-            {cvData.personal.email && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Email:</span>
-                <a href={`mailto:${cvData.personal.email}`} className="hover:underline">{cvData.personal.email}</a>
-              </div>
-            )}
-            {cvData.personal.telegram && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Telegram:</span>
-                <a href={`https://t.me/${cvData.personal.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  {cvData.personal.telegram}
-                </a>
-              </div>
-            )}
-            {cvData.personal.github && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">GitHub:</span>
-                <a href={cvData.personal.github} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  {cvData.personal.github}
-                </a>
-              </div>
-            )}
-            {cvData.personal.website && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Сайт:</span>
-                <a href={cvData.personal.website.startsWith('http') ? cvData.personal.website : `https://${cvData.personal.website}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  {cvData.personal.website}
-                </a>
-              </div>
-            )}
-            {cvData.personal.setka && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Сетка:</span>
-                <a href={cvData.personal.setka} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  {cvData.personal.setka}
-                </a>
-              </div>
-            )}
-            {cvData.personal.location && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Местоположение:</span>
-                <span>{cvData.personal.location}</span>
-              </div>
-            )}
-            {cvData.personal.citizenship && (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">Гражданство:</span>
-                <span>{cvData.personal.citizenship === 'RU' ? 'Россия' : cvData.personal.citizenship}</span>
-              </div>
-            )}
-          </div>
-        </section>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-black">
+                    {cvData.personal.email && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Email:</span>
+                            <a
+                                href={`mailto:${cvData.personal.email}`}
+                                className="hover:underline"
+                            >
+                                {cvData.personal.email}
+                            </a>
+                        </div>
+                    )}
+                    {cvData.personal.telegram && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Telegram:</span>
+                            <a
+                                href={`https://t.me/${cvData.personal.telegram.replace("@", "")}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                            >
+                                {cvData.personal.telegram}
+                            </a>
+                        </div>
+                    )}
+                    {cvData.personal.github && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">GitHub:</span>
+                            <a
+                                href={cvData.personal.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                            >
+                                {cvData.personal.github}
+                            </a>
+                        </div>
+                    )}
+                    {cvData.personal.website && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Сайт:</span>
+                            <a
+                                href={
+                                    cvData.personal.website.startsWith("http")
+                                        ? cvData.personal.website
+                                        : `https://${cvData.personal.website}`
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                            >
+                                {cvData.personal.website}
+                            </a>
+                        </div>
+                    )}
+                    {cvData.personal.setka && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Сетка:</span>
+                            <a
+                                href={cvData.personal.setka}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                            >
+                                {cvData.personal.setka}
+                            </a>
+                        </div>
+                    )}
+                    {cvData.personal.location && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Местоположение:</span>
+                            <span>{cvData.personal.location}</span>
+                        </div>
+                    )}
+                    {cvData.personal.citizenship && (
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Гражданство:</span>
+                            <span>
+                                {cvData.personal.citizenship === "RU"
+                                    ? "Россия"
+                                    : cvData.personal.citizenship}
+                            </span>
+                        </div>
+                    )}
+                </div>
+            </section>
 
-        {/* Summary */}
-        {cvData.summary && (
-          <section className="mb-6 pb-1">
-            <h2 className="text-xl font-bold mb-3 text-black pb-1">
-              Обо мне
-            </h2>
-            <div className="text-black whitespace-pre-line">{cvData.summary}</div>
-          </section>
-        )}
+            {/* Summary */}
+            {cvData.summary && (
+                <section className="mb-6 pb-1">
+                    <h2 className="text-xl font-bold mb-3 text-black pb-1">
+                        Обо мне
+                    </h2>
+                    <div className="text-black whitespace-pre-line">
+                        {cvData.summary}
+                    </div>
+                </section>
+            )}
 
-        {/* CV Blocks */}
-        <CVBlock data={cvData} />
-      </main>
-    </>
-  )
+            {/* CV Blocks */}
+            <CVBlock data={cvData} />
+        </main>
+    );
 }
 
-export default CV
+export default CV;
