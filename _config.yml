@@ -20,8 +20,9 @@
 
 lang: ru-RU
 title: Егор Гаврилов - Java-разработчик
+name: Егор Гаврилов
 email: work@oldzoomer.ru
-description: T-shaped Java-разработчик, с опытом в DevOps и ИИ.
+description: T-shaped Java/Vaadin-разработчик, с опытом в DevOps и ИИ
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://oldzoomer.ru" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: oldzoomer-ru
