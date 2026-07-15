@@ -7,6 +7,11 @@
 // Импортируем базовые сбросы стилей темы Minimal, но переопределяем сетку
 @import "{{ site.theme }}";
 
+@font-face {
+  font-family: 'Cantarell';
+  src: url('../fonts/Cantarell-VF.woff2') format('woff2');
+}
+
 // Спецификация Adwaita (Палитра GNOME 40+)
 :root {
   --window-bg-color: #fafafa;
@@ -18,7 +23,7 @@
   --card-bg-color: #ffffff;
   --card-radius: 12px;
   --border-color: rgba(0, 0, 0, 0.08);
-  --font-gnome: "Cantarell", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-gnome: "Cantarell", system-ui, sans-serif;
   --sidebar-width: 280px;
 }
 
