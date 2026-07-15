@@ -1,0 +1,81 @@
+---
+---
+// Импортируем базовые стили темы Minimal
+@import "{{ site.theme }}";
+
+@font-face {
+  font-family: "Cantarell";
+  src: url(../fonts/Cantarell-VF.otf);
+}
+
+// Спецификация Adwaita / GNOME.org (Переменные)
+:root {
+  --window-bg-color: #fafafa;
+  --view-bg-color: #ffffff;
+  --text-color: #2e3436;
+  --header-bg-color: #f6f6f6;
+  --accent-color: #3584e4; // Фирменный синий GNOME
+  --card-bg-color: #ffffff;
+  --card-radius: 12px;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --font-gnome: "Inter", "Cantarell", "Segoe UI", sans-serif;
+}
+
+// Автоматическая темная тема (Libadwaita Dark Mode)
+@media (prefers-color-scheme: dark) {
+  :root {
+    --window-bg-color: #242424;
+    --view-bg-color: #1e1e1e;
+    --text-color: #edf1f2;
+    --header-bg-color: #303030;
+    --card-bg-color: #2d2d2d;
+    --border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Применение стилей к структуре темы Minimal
+body {
+  font-family: var(--font-gnome);
+  background-color: var(--window-bg-color);
+  color: var(--text-color);
+}
+
+// Заголовки
+h1, h2, h3, h4 {
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+// Ссылки
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Кнопки (Скачать, GitHub и т.д.)
+.button {
+  background-color: var(--header-bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+  }
+}
+
+// Блоки кода (Стиль консоли Builder/Terminal)
+pre, code {
+  background-color: var(--header-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+}
