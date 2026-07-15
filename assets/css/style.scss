@@ -288,3 +288,24 @@ table {
     padding: 32px 24px;
   }
 }
+
+// Полная изоляция от старых стилей Minimal для левой колонки
+header {
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+  position: static !important;
+}
+
+// Избавляемся от фиксированного позиционирования контента Minimal
+section {
+  float: none !important;
+  width: auto !important;
+  max-width: 740px !important;
+}
+
+// Придание тексту "Обо мне" правильного отступа сверху
+.adwaita-main h1:first-of-type {
+  margin-top: 0;
+}
+
