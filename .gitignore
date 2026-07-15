@@ -6,3 +6,4 @@ vendor
 Gemfile.lock
 .idea/
 .vscode/
+_includes/profile-readme.html
