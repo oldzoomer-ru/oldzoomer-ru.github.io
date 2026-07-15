@@ -1,27 +1,28 @@
 ---
 ---
-// Импортируем базовые стили темы Minimal
+/* 
+ * Дизайн-система Libadwaita / GNOME.org для темы Jekyll Minimal
+ */
+
+// Импортируем базовые сбросы стилей темы Minimal, но переопределяем сетку
 @import "{{ site.theme }}";
 
-@font-face {
-  font-family: "Cantarell";
-  src: url(../fonts/Cantarell-VF.otf);
-}
-
-// Спецификация Adwaita / GNOME.org (Переменные)
+// Спецификация Adwaita (Палитра GNOME 40+)
 :root {
   --window-bg-color: #fafafa;
   --view-bg-color: #ffffff;
   --text-color: #2e3436;
   --header-bg-color: #f6f6f6;
-  --accent-color: #3584e4; // Фирменный синий GNOME
+  --accent-color: #3584e4;      // Фирменный синий GNOME Blue
+  --accent-hover: #1c71d8;
   --card-bg-color: #ffffff;
   --card-radius: 12px;
   --border-color: rgba(0, 0, 0, 0.08);
-  --font-gnome: "Inter", "Cantarell", "Segoe UI", sans-serif;
+  --font-gnome: "Cantarell", "Inter", "Segoe UI", system-ui, sans-serif;
+  --sidebar-width: 280px;
 }
 
-// Автоматическая темная тема (Libadwaita Dark Mode)
+// Автоматическая темная тема (Adwaita Dark Mode)
 @media (prefers-color-scheme: dark) {
   :root {
     --window-bg-color: #242424;
@@ -30,52 +31,260 @@
     --header-bg-color: #303030;
     --card-bg-color: #2d2d2d;
     --border-color: rgba(255, 255, 255, 0.08);
+    --accent-color: #62a0ea;
+    --accent-hover: #3584e4;
   }
 }
 
-// Применение стилей к структуре темы Minimal
+/* Базовые стили элементов */
 body {
   font-family: var(--font-gnome);
   background-color: var(--window-bg-color);
   color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-// Заголовки
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
   font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-// Ссылки
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; }
+h3 { font-size: 1.25rem; }
+
 a {
   color: var(--accent-color);
   text-decoration: none;
+  transition: color 0.15s ease;
   &:hover {
+    color: var(--accent-hover);
     text-decoration: underline;
   }
 }
 
-// Кнопки (Скачать, GitHub и т.д.)
-.button {
-  background-color: var(--header-bg-color) !important;
+p, li {
+  line-height: 1.6;
+}
+
+// Сброс фиксированного контейнера старого Minimal
+.wrapper {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Окно в стиле Libadwaita (Split View) */
+.adwaita-window {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--window-bg-color);
+}
+
+/* Левая боковая панель (Sidebar) */
+.adwaita-sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--header-bg-color);
+  border-right: 1px solid var(--border-color);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  .sidebar-logo {
+    max-width: 64px;
+    height: auto;
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+
+  .sidebar-header {
+    h1 {
+      font-size: 1.3rem;
+      margin: 0 0 6px 0;
+      font-weight: 800;
+      a {
+        color: var(--text-color);
+        &:hover { text-decoration: none; }
+      }
+    }
+    p {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* Навигация (Виджеты Adw.ActionRow / ListBox) */
+.sidebar-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .nav-item {
+    display: block;
+    padding: 10px 14px;
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      text-decoration: none;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebar-navigation .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Блок скачивания релизов в сайдбаре */
+.sidebar-downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto; /* Прижимает блок к низу сайдбара */
+}
+
+/* Кнопки (Стиль кнопок Libadwaita) */
+.button, button {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--view-bg-color) !important;
   color: var(--text-color) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 8px !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+  padding: 10px 16px !important;
+  font-size: 0.9rem;
   font-weight: 600;
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.15s ease;
+  cursor: pointer;
   
   &:hover {
     background-color: var(--accent-color) !important;
     color: #ffffff !important;
     border-color: transparent !important;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(53, 132, 228, 0.2) !important;
+  }
+  
+  &:active {
+    transform: scale(0.97);
   }
 }
 
-// Блоки кода (Стиль консоли Builder/Terminal)
-pre, code {
+/* Главная рабочая область сайта (Main View) */
+.adwaita-main {
+  flex: 1;
+  background-color: var(--view-bg-color);
+  padding: 50px 80px;
+  overflow-y: auto;
+  
+  section {
+    max-width: 740px; /* Удобная ширина строки для чтения документации */
+    margin: 0 auto;
+  }
+
+  footer {
+    max-width: 740px;
+    margin: 60px auto 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+}
+
+/* Элементы разметки контента (Стиль GNOME Builder / Терминала) */
+pre {
+  background-color: var(--header-bg-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--card-radius);
+  padding: 16px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.85em;
   background-color: var(--header-bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  padding: 3px 6px;
+  border-radius: 6px;
   color: var(--text-color);
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+blockquote {
+  border-left: 4px solid var(--accent-color);
+  padding: 4px 20px;
+  margin: 20px 0;
+  color: var(--text-color);
+  opacity: 0.85;
+  background-color: var(--header-bg-color);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+  }
+  th {
+    background-color: var(--header-bg-color);
+    font-weight: 600;
+  }
+}
+
+/* Адаптивный дизайн для мобильных экранов */
+@media (max-width: 860px) {
+  .adwaita-window {
+    flex-direction: column;
+  }
+  
+  .adwaita-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 24px;
+    
+    .sidebar-downloads {
+      margin-top: 10px;
+      flex-direction: row;
+      .button { flex: 1; }
+    }
+  }
+  
+  .adwaita-main {
+    padding: 32px 24px;
+  }
 }
