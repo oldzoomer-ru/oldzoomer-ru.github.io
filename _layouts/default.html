@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
+<html lang="{{ site.lang | ru-RU }}">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ " /assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/style.css' | relative_url }}">
   {% seo %}
 </head>
 
@@ -25,12 +25,12 @@
         <ul>
           <!-- Красивый заголовок-кнопка вместо наехавших текстов -->
           <li>
-            <a href="{{ " /" | relative_url }}" class="nav-item"
+            <a href="{{ '/' | relative_url }}" class="nav-item"
               style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">
-              Егор Гаврилов
+              { 'Егор Гаврилов' | site.name }
             </a>
           </li>
-          <li><a href="{{ " /" | relative_url }}" class="nav-item">Главная</a></li>
+          <li><a href="{{ '/' | relative_url }}" class="nav-item">Главная</a></li>
         </ul>
       </nav>
 
