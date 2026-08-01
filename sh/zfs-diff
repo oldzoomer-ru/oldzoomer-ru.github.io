@@ -1,0 +1,150 @@
+---
+layout: none
+permalink: /sh/zfs-diff
+---
+#!/usr/bin/env bash
+# zfs-diff-all.sh - рекурсивное сравнение снапшотов по всем пулам
+#
+# Использование: curl -sL oldzoomer.ru/sh/zfs-diff-all | bash -s <snap1> [snap2] [пулы...]
+# Или: wget -qO- oldzoomer.ru/sh/zfs-diff-all | bash -s before_update after_update
+#
+# Примеры:
+#   ./zfs-diff-all before_update after_update
+#   ./zfs-diff-all before_update "" bpool rpool
+#   ./zfs-diff-all yesterday_snapshot
+
+set -euo pipefail
+
+usage() {
+    cat << EOF >&2
+Использование: $0 <snap1> [snap2] [пулы...]
+
+Примеры:
+  $0 before_update after_update
+  $0 before_update after_update bpool rpool
+  $0 before_update "" rpool
+
+Если snap2 не указан или пустая строка, сравнивается с текущим состоянием.
+Если пулы не указаны, автоматически определяются все импортированные пулы.
+EOF
+    exit 1
+}
+
+[[ $# -lt 1 ]] && usage
+
+SNAP1="$1"
+SNAP2="${2:-}"
+shift 2 2>/dev/null || shift $# 2>/dev/null
+
+# Определяем пулы
+if [[ $# -gt 0 ]]; then
+    POOLS=("$@")
+else
+    # Автоматически находим все импортированные пулы
+    mapfile -t POOLS < <(zpool list -H -o name 2>/dev/null | grep -E "^(bpool|rpool)$" || zpool list -H -o name 2>/dev/null)
+    if [[ ${#POOLS[@]} -eq 0 ]]; then
+        echo "[!] Не найдено ни одного ZFS-пула" >&2
+        exit 1
+    fi
+fi
+
+echo "=== Рекурсивное сравнение снапшотов ZFS ==="
+echo "Снапшот 1: @${SNAP1}"
+if [[ -n "$SNAP2" ]]; then
+    echo "Снапшот 2: @${SNAP2}"
+else
+    echo "Снапшот 2: (текущее состояние)"
+fi
+echo "Пулы: ${POOLS[*]}"
+echo ""
+
+TOTAL_ADDED=0
+TOTAL_REMOVED=0
+TOTAL_MODIFIED=0
+TOTAL_RENAMED=0
+
+for pool in "${POOLS[@]}"; do
+    if ! zpool list -H -o name "$pool" &>/dev/null; then
+        echo "[!] Пул $pool не найден. Пропускаем."
+        continue
+    fi
+    
+    echo "=========================================="
+    echo "Пул: $pool"
+    echo "=========================================="
+    
+    DATASETS=$(zfs list -H -o name -r "$pool")
+    
+    for dataset in $DATASETS; do
+        if ! zfs list -H -t snapshot -o name "${dataset}@${SNAP1}" &>/dev/null; then
+            continue
+        fi
+        
+        if [[ -n "$SNAP2" ]]; then
+            if ! zfs list -H -t snapshot -o name "${dataset}@${SNAP2}" &>/dev/null; then
+                continue
+            fi
+            SNAP2_FULL="${dataset}@${SNAP2}"
+        else
+            SNAP2_FULL=""
+        fi
+        
+        if [[ -n "$SNAP2_FULL" ]]; then
+            DIFF_OUTPUT=$(zfs diff "${dataset}@${SNAP1}" "$SNAP2_FULL" 2>/dev/null || true)
+        else
+            DIFF_OUTPUT=$(zfs diff "${dataset}@${SNAP1}" 2>/dev/null || true)
+        fi
+        
+        if [[ -z "$DIFF_OUTPUT" ]]; then
+            continue
+        fi
+        
+        echo ""
+        echo "Датасет: $dataset"
+        echo "---"
+        
+        ADDED=0
+        REMOVED=0
+        MODIFIED=0
+        RENAMED=0
+        
+        echo "$DIFF_OUTPUT" | while IFS=$'\t' read -r type path extra; do
+            case "$type" in
+                "+")
+                    echo -e "  \033[32m+ $path\033[0m"
+                    ;;
+                "-")
+                    echo -e "  \033[31m- $path\033[0m"
+                    ;;
+                "M")
+                    echo -e "  \033[33mM $path\033[0m"
+                    ;;
+                "R")
+                    echo -e "  \033[36mR $path -> $extra\033[0m"
+                    ;;
+            esac
+        done
+        
+        ADDED=$(echo "$DIFF_OUTPUT" | grep -c "^+" || true)
+        REMOVED=$(echo "$DIFF_OUTPUT" | grep -c "^-" || true)
+        MODIFIED=$(echo "$DIFF_OUTPUT" | grep -c "^M" || true)
+        RENAMED=$(echo "$DIFF_OUTPUT" | grep -c "^R" || true)
+        
+        echo "  [Статистика: +$ADDED -$REMOVED M$MODIFIED R$RENAMED]"
+        
+        TOTAL_ADDED=$((TOTAL_ADDED + ADDED))
+        TOTAL_REMOVED=$((TOTAL_REMOVED + REMOVED))
+        TOTAL_MODIFIED=$((TOTAL_MODIFIED + MODIFIED))
+        TOTAL_RENAMED=$((TOTAL_RENAMED + RENAMED))
+    done
+done
+
+echo ""
+echo "=========================================="
+echo "ОБЩАЯ СТАТИСТИКА"
+echo "=========================================="
+echo "Добавлено:     $TOTAL_ADDED"
+echo "Удалено:       $TOTAL_REMOVED"
+echo "Изменено:      $TOTAL_MODIFIED"
+echo "Переименовано: $TOTAL_RENAMED"
+echo "Всего:         $((TOTAL_ADDED + TOTAL_REMOVED + TOTAL_MODIFIED + TOTAL_RENAMED))"
