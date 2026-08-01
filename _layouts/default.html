@@ -12,46 +12,24 @@
 <body>
   <div class="adwaita-window">
 
-    <!-- Боковая панель Libadwaita Sidebar -->
     <aside class="adwaita-sidebar">
-      <header class="sidebar-header">
-        {% if site.logo %}
-        <img src="{{ site.logo | relative_url }}" alt="Logo" class="sidebar-logo" />
-        {% endif %}
-        <!-- Удалено дублирование h1, оставляем только навигацию ниже -->
-      </header>
 
       <nav class="sidebar-navigation">
         <ul>
-          <!-- Красивый заголовок-кнопка вместо наехавших текстов -->
           <li>
             <a href="{{ '/' | relative_url }}" class="nav-item"
               style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">
               {{ 'Егор Гаврилов' | site.name }}
             </a>
           </li>
-          <li><a href="{{ '/' | relative_url }}" class="nav-item">Главная</a></li>
         </ul>
       </nav>
-
-      {% if site.show_downloads %}
-      <div class="sidebar-downloads">
-        <a href="{{ site.github.zip_url }}" class="button">Скачать .zip</a>
-        <a href="{{ site.github.tar_url }}" class="button">Скачать .tar.gz</a>
-      </div>
-      {% endif %}
     </aside>
 
-    <!-- Главная область контента View -->
     <main class="adwaita-main">
       <section>
         {{ content }}
       </section>
-
-      <footer>
-        <p><small>Проект поддерживает <a href="{{ site.github.owner_name }}">{{ site.github.owner_name }}</a></small>
-        </p>
-      </footer>
     </main>
 
   </div>
