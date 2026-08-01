@@ -1,0 +1,65 @@
+---
+layout: none
+permalink: /sh/zfs-recovery
+---
+#!/usr/bin/env bash
+#
+# zfs-recovery.sh
+# Полный откат bpool и rpool к указанному снапшоту из LiveUSB (Ubuntu ZFS on Root).
+#
+# Использование: curl -sL oldzoomer.ru/sh/zfs-recovery | bash -s <snapshot_tag>
+# Или: wget -qO- oldzoomer.ru/sh/zfs-recovery | bash -s <snapshot_tag>
+
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+    echo "[!] Ошибка: Скрипт необходимо запускать от имени root." >&2
+    exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+    echo "[!] Ошибка: Не указано имя снапшота." >&2
+    echo "Использование: $0 <snapshot_tag>" >&2
+    exit 1
+fi
+
+SNAP_TAG="$1"
+if [[ "$SNAP_TAG" == *"@"* ]]; then
+    SNAP_TAG="${SNAP_TAG##*@}"
+fi
+
+echo "=== ZFS Full System Rollback ==="
+echo "Целевой тег: $SNAP_TAG"
+echo "ВНИМАНИЕ: Все снапшоты новее указанного будут УНИЧТОЖЕНЫ!"
+read -p "Продолжить? (y/N): " confirm
+if [[ "${confirm,,}" != "y" ]]; then
+    echo "Отменено."
+    exit 0
+fi
+
+echo "[*] Импорт ZFS-пулов в /mnt..."
+zpool import -a -R /mnt -f || true
+
+POOLS="bpool rpool"
+
+for pool in $POOLS; do
+    if ! zpool list -H -o name | grep -q "^${pool}$"; then
+        echo "[-] Пул ${pool} не найден. Пропускаем."
+        continue
+    fi
+
+    echo "[*] Обработка пула: ${pool}"
+    DATASETS=$(zfs list -H -o name -r "${pool}")
+    
+    for ds in $DATASETS; do
+        if zfs list -t snapshot -H -o name "${ds}" | grep -q "@${SNAP_TAG}$"; then
+            echo "  -> Откат: ${ds}@${SNAP_TAG}"
+            zfs rollback -r "${ds}@${SNAP_TAG}"
+        fi
+    done
+done
+
+echo "[*] Экспорт пулов..."
+zpool export bpool rpool 2>/dev/null || true
+
+echo "[+] Готово! Можно перезагружаться."
