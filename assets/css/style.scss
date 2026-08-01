@@ -107,13 +107,6 @@ p, li {
   box-sizing: border-box;
   flex-shrink: 0;
 
-  .sidebar-logo {
-    max-width: 64px;
-    height: auto;
-    margin-bottom: 12px;
-    border-radius: 8px;
-  }
-
   .sidebar-header {
     h1 {
       font-size: 1.3rem;
@@ -167,14 +160,6 @@ p, li {
   }
 }
 
-/* Блок скачивания релизов в сайдбаре */
-.sidebar-downloads {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: auto; /* Прижимает блок к низу сайдбара */
-}
-
 /* Кнопки (Стиль кнопок Libadwaita) */
 .button, button {
   display: inline-block;
@@ -213,15 +198,6 @@ p, li {
   section {
     max-width: 740px; /* Удобная ширина строки для чтения документации */
     margin: 0 auto;
-  }
-
-  footer {
-    max-width: 740px;
-    margin: 60px auto 0 auto;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-    font-size: 0.85rem;
-    opacity: 0.6;
   }
 }
 
