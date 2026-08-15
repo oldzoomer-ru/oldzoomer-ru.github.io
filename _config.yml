@@ -18,11 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-lang: ru-RU
-title: Егор Гаврилов - Java-разработчик
-name: Егор Гаврилов
+lang: en-US
+title: Egor Gavrilov - Java Developer
+name: Egor Gavrilov
 email: work@oldzoomer.ru
-description: T-shaped Java/Vaadin-разработчик, с опытом в DevOps и ИИ
+description: T-shaped Java/Vaadin Developer with DevOps/DevEx/AI experience
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://oldzoomer.ru" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: oldzoomer-ru
