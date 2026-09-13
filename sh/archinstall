@@ -5,9 +5,7 @@ permalink: /sh/archinstall
 #!/bin/bash
 set -e
 
-# ==========================================
-# Конфигурация установки
-# ==========================================
+# Конфигурация
 DISK="/dev/nvme0n1"
 EFI_PART="${DISK}p1"
 LUKS_PART="${DISK}p2"
@@ -15,76 +13,69 @@ LUKS_NAME="root"
 HOSTNAME="oldzoomer-laptop"
 TIMEZONE="Europe/Moscow"
 
-# ==========================================
-# 1. Проверки
-# ==========================================
+# Проверки
 if [[ $EUID -ne 0 ]]; then
-   echo "❌ Этот скрипт должен быть запущен от root"
+   echo "Ошибка: скрипт должен быть запущен от root"
    exit 1
 fi
 
 if [ ! -d /sys/firmware/efi/efivars ]; then
-   echo "❌ Система загружена не в режиме UEFI. Перезагрузите компьютер в UEFI режиме."
+   echo "Ошибка: система загружена не в режиме UEFI"
    exit 1
 fi
 
 if ! ping -c 1 archlinux.org &> /dev/null; then
-   echo "❌ Нет подключения к интернету. Проверьте сеть (например, через nmtui)."
+   echo "Ошибка: нет подключения к интернету"
    exit 1
 fi
 
-echo "⚠️  ВСТАВЬТЕ YubiKey в USB-порт."
+echo "Вставьте YubiKey в USB-порт."
 read -p "Нажмите Enter, когда ключ вставлен и вы готовы..."
 
-# ==========================================
-# 2. Разметка диска
-# ==========================================
-echo "🔄 Очистка и разметка диска ${DISK}..."
+# Разметка диска
 sgdisk --zap-all ${DISK}
 sgdisk -n 1:0:+512M -t 1:ef00 ${DISK}
 sgdisk -n 2:0:0 -t 2:8309 ${DISK}
 
-# ==========================================
-# 3. Шифрование LUKS2 + FIDO2
-# ==========================================
-echo "🔐 Форматирование LUKS2..."
+# Шифрование LUKS2 + FIDO2
 cryptsetup luksFormat --type luks2 --cipher aes-xts-plain64 --hash sha512 --iter-time 5000 ${LUKS_PART}
-
-echo "🔓 Открытие LUKS..."
 cryptsetup open ${LUKS_PART} ${LUKS_NAME}
-
-echo "🔑 Регистрация FIDO2 для разблокировки LUKS (коснитесь ключа при запросе)..."
 systemd-cryptenroll --fido2-device=auto ${LUKS_PART}
 
 LUKS_UUID=$(blkid -s UUID -o value ${LUKS_PART})
-echo "✅ UUID LUKS-раздела: ${LUKS_UUID}"
 
-# ==========================================
-# 4. Файловые системы (NILFS2)
-# ==========================================
-echo "💾 Форматирование EFI и NILFS2..."
+# Файловые системы BTRFS
 mkfs.fat -F32 ${EFI_PART}
-mkfs.nilfs2 /dev/mapper/${LUKS_NAME}
+mkfs.btrfs -f -L arch-root /dev/mapper/${LUKS_NAME}
 
-# ==========================================
-# 5. Подготовка точек монтирования
-# ==========================================
-echo "📁 Монтирование разделов..."
 mount /dev/mapper/${LUKS_NAME} /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+
+# Установка @ как дефолтного сабвольюма (критично для snapper rollback + UKI)
+SUBVOL_ID=$(btrfs subvolume list /mnt | grep 'path @$' | awk '{print $2}')
+btrfs subvolume set-default ${SUBVOL_ID} /mnt
+umount /mnt
+
+# Монтирование
+# Корень монтируется без subvol=, чтобы использовался дефолтный сабвольюм
+mount -o noatime,compress=zstd /dev/mapper/${LUKS_NAME} /mnt
+
+mkdir -p /mnt/home
+mount -o noatime,compress=zstd,subvol=@home /dev/mapper/${LUKS_NAME} /mnt/home
+
 mkdir -p /mnt/boot
 mount ${EFI_PART} /mnt/boot
 
-# ==========================================
-# 6. Установка базовой системы
-# ==========================================
-echo "📦 Установка пакетов..."
+# Установка базовой системы
 reflector --country Russia --age 12 --protocol https --sort rate \
       --save /etc/pacman.d/mirrorlist 2>/dev/null || true
 
 pacstrap -K /mnt \
     base linux linux-firmware amd-ucode \
     nano man-db tree less bash-completion \
-    nilfs-utils \
+    btrfs-progs snapper snap-pac \
+    zram-generator \
     gnome-shell gnome-control-center nautilus gnome-console flatpak gdm gnome-keyring \
     networkmanager openssh \
     pipewire pipewire-pulse pipewire-alsa wireplumber \
@@ -97,27 +88,19 @@ pacstrap -K /mnt \
     base-devel git libfido2 efibootmgr \
     plymouth
 
-# ==========================================
-# 7. Базовая настройка (Chroot)
-# ==========================================
-echo "📝 Генерация fstab..."
+# Базовая настройка
 genfstab -U /mnt >> /mnt/etc/fstab
+# Замена subvol=@ на subvolid=0 для поддержки snapper rollback
+sed -i 's/subvol=@/subvolid=0/' /mnt/etc/fstab
 
-echo "🔐 Блокировка root-аккаунта (без пароля)..."
 arch-chroot /mnt passwd -l root
-
-echo "🔗 Настройка resolv.conf..."
 ln -sf ../run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
 
-# ==========================================
-# 8. Интерактивное создание пользователя и регистрация ключа
-# ==========================================
-echo "👤 Настройка основного пользователя..."
-read -p "Введите имя основного пользователя (латиницей, например, egor): " MAIN_USER < /dev/tty
+# Создание пользователя
+read -p "Введите имя основного пользователя (латиницей): " MAIN_USER < /dev/tty
 read -s -p "Введите пароль для ${MAIN_USER}: " MAIN_USER_PASS < /dev/tty
 echo ""
 
-echo "⚠️  КОСНИТЕСЬ YubiKey для регистрации..."
 arch-chroot /mnt /bin/bash << USER_SETUP
 useradd -m -G wheel,audio,video,network,storage,input -s /bin/bash "${MAIN_USER}"
 echo "${MAIN_USER}:${MAIN_USER_PASS}" | chpasswd
@@ -126,14 +109,8 @@ USER_SETUP
 arch-chroot /mnt /bin/bash -c "pamu2fcfg -u '${MAIN_USER}' --origin=pam://${HOSTNAME} --appid=pam://${HOSTNAME} > /etc/u2f_mappings" < /dev/tty
 arch-chroot /mnt chmod 600 /etc/u2f_mappings
 
-echo "✅ Пользователь '${MAIN_USER}' создан, ключ зарегистрирован."
-
-# ==========================================
-# 9. Основная non-interactive настройка (Chroot)
-# ==========================================
-echo "⚙️ Настройка chroot окружения..."
+# Настройка chroot окружения
 arch-chroot /mnt /bin/bash << EOF
-# Локаль и время
 ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 hwclock --systohc
 sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
@@ -141,13 +118,11 @@ sed -i 's/#ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
 
-# Консоль и шрифт
 cat << 'VCONSOLE' > /etc/vconsole.conf
 KEYMAP=ruwin_cplk-UTF-8
 FONT=cyr-sun16
 VCONSOLE
 
-# Настройка клавиатуры для X11/Wayland
 mkdir -p /etc/X11/xorg.conf.d
 cat << 'XKB' > /etc/X11/xorg.conf.d/00-keyboard.conf
 Section "InputClass"
@@ -158,7 +133,6 @@ Section "InputClass"
 EndSection
 XKB
 
-# Хост
 echo "${HOSTNAME}" > /etc/hostname
 cat << 'HOSTS' > /etc/hosts
 127.0.0.1   localhost
@@ -166,9 +140,6 @@ cat << 'HOSTS' > /etc/hosts
 127.0.1.1   ${HOSTNAME}.localdomain ${HOSTNAME}
 HOSTS
 
-# ==========================================
-# mDNS и DNS через systemd-resolved + Avahi
-# ==========================================
 cat << 'RESOLVED' > /etc/systemd/resolved.conf
 [Resolve]
 DNS=77.88.8.8#common.dot.dns.yandex.net 77.88.8.1#common.dot.dns.yandex.net
@@ -179,43 +150,47 @@ RESOLVED
 
 sed -i 's/^hosts:.*/hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns/' /etc/nsswitch.conf
 
-# ==========================================
-# NILFS2: Настройка PiTR и сборщика мусора
-# ==========================================
-# Храним сегменты 168 часов (7 дней) для непрерывного отката
-sed -i 's/^#nhours = .*/nhours = 168/' /etc/nilfs_cleanerd.conf
+# Snapper
+snapper --no-dbus -c root create-config /
+snapper --no-dbus -c home create-config /home
 
-# Создаем systemd-юнит для nilfs_cleanerd (отсутствует в пакете по умолчанию)
-cat << 'NILFSSERVICE' > /etc/systemd/system/nilfs-cleanerd.service
-[Unit]
-Description=NILFS2 Garbage Collector Daemon
-After=local-fs.target
+sed -i 's/^TIMELINE_LIMIT_HOURLY=".*"/TIMELINE_LIMIT_HOURLY="0"/' /etc/snapper/configs/root
+sed -i 's/^TIMELINE_LIMIT_DAILY=".*"/TIMELINE_LIMIT_DAILY="7"/' /etc/snapper/configs/root
+sed -i 's/^TIMELINE_LIMIT_WEEKLY=".*"/TIMELINE_LIMIT_WEEKLY="4"/' /etc/snapper/configs/root
+sed -i 's/^TIMELINE_LIMIT_MONTHLY=".*"/TIMELINE_LIMIT_MONTHLY="0"/' /etc/snapper/configs/root
 
-[Service]
-Type=simple
-ExecStart=/usr/bin/nilfs_cleanerd
-Restart=on-failure
+sed -i 's/^TIMELINE_LIMIT_HOURLY=".*"/TIMELINE_LIMIT_HOURLY="24"/' /etc/snapper/configs/home
+sed -i 's/^TIMELINE_LIMIT_DAILY=".*"/TIMELINE_LIMIT_DAILY="30"/' /etc/snapper/configs/home
+sed -i 's/^TIMELINE_LIMIT_WEEKLY=".*"/TIMELINE_LIMIT_WEEKLY="12"/' /etc/snapper/configs/home
+sed -i 's/^TIMELINE_LIMIT_MONTHLY=".*"/TIMELINE_LIMIT_MONTHLY="12"/' /etc/snapper/configs/home
 
-[Install]
-WantedBy=multi-user.target
-NILFSSERVICE
+systemctl enable snapper-timeline.timer
+systemctl enable snapper-cleanup.timer
 
-systemctl enable nilfs-cleanerd.service
+# ZRAM
+cat << 'ZRAMCONF' > /etc/systemd/zram-generator.conf
+[zram0]
+zram-size = ram / 2
+compression-algorithm = zstd
+ZRAMCONF
 
-echo 'options nvidia NVreg_TemporaryFilePath=/tmp' >> /etc/modprobe.d/nvidia.conf
+# PAM U2F
+awk '/^auth[[:space:]]+required[[:space:]]+pam_faillock\.so.*preauth/ {
+    print
+    print "auth sufficient pam_u2f.so cue authfile=/etc/u2f_mappings origin=pam://${HOSTNAME} appid=pam://${HOSTNAME}"
+    next
+}
+{print}' /etc/pam.d/system-auth > /etc/pam.d/system-auth.tmp && mv /etc/pam.d/system-auth.tmp /etc/pam.d/system-auth
 
-# ==========================================
-# sudo для группы wheel
-# ==========================================
+# Sudo
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/10-wheel
 chmod 440 /etc/sudoers.d/10-wheel
 
-# ==========================================
 # UKI + Plymouth + AppArmor + EFISTUB
-# ==========================================
 mkdir -p /etc/kernel
+# rootflags без subvol=@: ядро монтирует дефолтный сабвольюм (поддержка snapper rollback)
 cat << CMDLINE > /etc/kernel/cmdline
-root=/dev/mapper/root rw rd.luks.name=${LUKS_UUID}=root fido2-device=auto lsm=landlock,lockdown,yama,integrity,apparmor,bpf quiet splash loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0
+root=/dev/mapper/root rw rootflags=compress=zstd rd.luks.name=${LUKS_UUID}=root fido2-device=auto lsm=landlock,lockdown,yama,integrity,apparmor,bpf quiet splash loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0
 CMDLINE
 
 sed -i 's/^#default_uki=/default_uki=/' /etc/mkinitcpio.d/linux.preset
@@ -227,33 +202,23 @@ sed -i 's|^fallback_uki=.*|fallback_uki="/boot/EFI/Linux/arch-linux-fallback.efi
 sed -i 's/^fallback_image=/#fallback_image=/' /etc/mkinitcpio.d/linux.preset
 
 mkdir -p /boot/EFI/Linux
-
-# ВАЖНО: Удален хук 'fsck', так как NILFS2 не имеет полноценного fsck-хелпера
 sed -i 's/^HOOKS=.*/HOOKS=(base systemd plymouth autodetect microcode modconf keyboard sd-vconsole block sd-encrypt filesystems)/' /etc/mkinitcpio.conf
-
-# Добавляем утилиты nilfs в initramfs на случай аварийного восстановления
-sed -i 's/^#BINARIES=.*/BINARIES=(nilfs_cleanerd lscp mkcp rmcp)/' /etc/mkinitcpio.conf
-
 mkinitcpio -P
 
-# EFISTUB записи
-echo "⚙️  Создание записей загрузки EFISTUB..."
-efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux" --loader '\EFI\Linux\arch-linux.efi'
-efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux Fallback" --loader '\EFI\Linux\arch-linux-fallback.efi'
+# Очистка и создание записей загрузки
+efibootmgr | grep -i "Arch Linux" | awk '{print \$1}' | sed 's/[^0-9]//g' | while read bootnum; do
+    efibootmgr -b \$bootnum -B 2>/dev/null || true
+done
 
-# ==========================================
-# Включение сервисов
-# ==========================================
+efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux" --loader '\\EFI\\Linux\\arch-linux.efi'
+efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux Fallback" --loader '\\EFI\\Linux\\arch-linux-fallback.efi'
+
+# Сервисы
 systemctl enable systemd-resolved NetworkManager
 systemctl enable gdm switcheroo-control
 systemctl enable bluetooth cups avahi-daemon
 systemctl enable apparmor
 EOF
 
-U2F_PAM_RULE="auth sufficient pam_u2f.so cue authfile=/etc/u2f_mappings origin=pam://${HOSTNAME} appid=pam://${HOSTNAME}"
-echo "============================================================"
-echo "⚠️  ВАЖНО: Добавьте следующую строку в /etc/pam.d/system-auth:"
-echo "${U2F_PAM_RULE}"
-echo "============================================================"
-echo "✅ Установка успешно завершена!"
-echo "🔌 Извлеките YubiKey и введите 'reboot' для перезагрузки."
+echo "Установка завершена."
+echo "Извлеките YubiKey и выполните reboot."
