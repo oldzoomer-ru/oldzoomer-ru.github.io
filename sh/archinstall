@@ -198,10 +198,6 @@ sed -i 's/^#default_uki=/default_uki=/' /etc/mkinitcpio.d/linux.preset
 sed -i 's|^default_uki=.*|default_uki="/boot/EFI/Linux/arch-linux.efi"|' /etc/mkinitcpio.d/linux.preset
 sed -i 's/^default_image=/#default_image=/' /etc/mkinitcpio.d/linux.preset
 
-sed -i 's/^#fallback_uki=/fallback_uki=/' /etc/mkinitcpio.d/linux.preset
-sed -i 's|^fallback_uki=.*|fallback_uki="/boot/EFI/Linux/arch-linux-fallback.efi"|' /etc/mkinitcpio.d/linux.preset
-sed -i 's/^fallback_image=/#fallback_image=/' /etc/mkinitcpio.d/linux.preset
-
 mkdir -p /boot/EFI/Linux
 
 # Ранняя загрузка модулей NVIDIA (Early KMS)
@@ -218,7 +214,6 @@ efibootmgr | grep -i "Arch Linux" | awk '{print \$1}' | sed 's/[^0-9]//g' | whil
 done
 
 efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux" --loader '\\EFI\\Linux\\arch-linux.efi'
-efibootmgr --create --disk ${DISK} --part 1 --label "Arch Linux Fallback" --loader '\\EFI\\Linux\\arch-linux-fallback.efi'
 
 # Сервисы
 systemctl enable systemd-resolved NetworkManager
