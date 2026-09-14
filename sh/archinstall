@@ -189,8 +189,9 @@ chmod 440 /etc/sudoers.d/10-wheel
 # UKI + Plymouth + AppArmor + EFISTUB
 mkdir -p /etc/kernel
 # rootflags без subvol=@: ядро монтирует дефолтный сабвольюм (поддержка snapper rollback)
+# Добавлен nvidia_drm.modeset=1 для корректной работы Plymouth и Early KMS с NVIDIA
 cat << CMDLINE > /etc/kernel/cmdline
-root=/dev/mapper/root rw rootflags=compress=zstd rd.luks.name=${LUKS_UUID}=root fido2-device=auto lsm=landlock,lockdown,yama,integrity,apparmor,bpf quiet splash loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0
+root=/dev/mapper/root rw rootflags=compress=zstd rd.luks.name=${LUKS_UUID}=root fido2-device=auto lsm=landlock,lockdown,yama,integrity,apparmor,bpf quiet splash loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0 nvidia_drm.modeset=1
 CMDLINE
 
 sed -i 's/^#default_uki=/default_uki=/' /etc/mkinitcpio.d/linux.preset
@@ -202,7 +203,13 @@ sed -i 's|^fallback_uki=.*|fallback_uki="/boot/EFI/Linux/arch-linux-fallback.efi
 sed -i 's/^fallback_image=/#fallback_image=/' /etc/mkinitcpio.d/linux.preset
 
 mkdir -p /boot/EFI/Linux
-sed -i 's/^HOOKS=.*/HOOKS=(base systemd plymouth autodetect microcode modconf keyboard sd-vconsole block sd-encrypt filesystems)/' /etc/mkinitcpio.conf
+
+# Ранняя загрузка модулей NVIDIA (Early KMS)
+sed -i 's/^#*MODULES=.*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
+
+# Настройка хуков: добавлен fsck перед filesystems
+sed -i 's/^HOOKS=.*/HOOKS=(base systemd plymouth autodetect microcode modconf keyboard sd-vconsole block sd-encrypt fsck filesystems)/' /etc/mkinitcpio.conf
+
 mkinitcpio -P
 
 # Очистка и создание записей загрузки
