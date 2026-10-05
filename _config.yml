@@ -18,9 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-lang: en-US
-title: Egor Gavrilov - Java Developer
-name: Egor Gavrilov
+lang: ru-RU
+title: Егор Гаврилов - Java Developer
+name: Егор Гаврилов
 email: work@oldzoomer.ru
 description: T-shaped Java/Vaadin Developer with DevOps/DevEx/AI experience
 baseurl: "" # the subpath of your site, e.g. /blog
