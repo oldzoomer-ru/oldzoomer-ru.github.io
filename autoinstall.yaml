@@ -11,7 +11,7 @@ autoinstall:
   locale: "ru_RU.UTF-8"
   timezone: "Europe/Moscow"
   keyboard:
-    layout: "us,ru"
+    layout: "us"
     toggle: "caps_toggle"
   refresh-installer:
     update: true
